@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */; };
+		2D2B595F1AA59B0E0074D11F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B595E1AA59B0E0074D11F /* DataManager.swift */; };
 		2D4155791A84A571004B6A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4155781A84A571004B6A0E /* AppDelegate.swift */; };
 		2D41557B1A84A571004B6A0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D41557A1A84A571004B6A0E /* ViewController.swift */; };
 		2D41557E1A84A571004B6A0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D41557C1A84A571004B6A0E /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		2D2B595E1AA59B0E0074D11F /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D4155731A84A571004B6A0E /* Map Tagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map Tagger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D4155771A84A571004B6A0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D4155781A84A571004B6A0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 			children = (
 				2D4155781A84A571004B6A0E /* AppDelegate.swift */,
 				2D41557A1A84A571004B6A0E /* ViewController.swift */,
+				2D2B595E1AA59B0E0074D11F /* DataManager.swift */,
+				2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */,
 				2D41557C1A84A571004B6A0E /* Main.storyboard */,
 				2D41557F1A84A571004B6A0E /* Images.xcassets */,
 				2D4155811A84A571004B6A0E /* LaunchScreen.xib */,
@@ -274,6 +280,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */,
+				2D2B595F1AA59B0E0074D11F /* DataManager.swift in Sources */,
 				2D41557B1A84A571004B6A0E /* ViewController.swift in Sources */,
 				2D4155791A84A571004B6A0E /* AppDelegate.swift in Sources */,
 			);
@@ -484,6 +492,7 @@
 				2D4155941A84A571004B6A0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2D4155951A84A571004B6A0E /* Build configuration list for PBXNativeTarget "Map TaggerTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +501,7 @@
 				2D4155971A84A571004B6A0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
