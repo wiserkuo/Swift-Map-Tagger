@@ -7,19 +7,13 @@
 //
 
 import UIKit
-class MarkerInfo: NSObject {
-    var coordinate: CLLocationCoordinate2D
-    var address: String
-    init(coordinate : CLLocationCoordinate2D,address : String){
-        self.coordinate = coordinate
-        self.address = address
-        super.init()
-    }
-}
+
 class ViewController: UIViewController , CLLocationManagerDelegate{
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
-
+    @IBAction func doneTableViewController(segue:UIStoryboardSegue){
+        
+    }
     @IBAction func searchAddressTapped(sender: AnyObject) {
         println(addressTextField.text);
 
@@ -43,7 +37,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         var coordinate:CLLocationCoordinate2D!
         coordinate=DataManager.getCoordinateFromGMS(addressTextField.text)
         //self.mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: 35.6894875 , longitude: 139.6917064 ) , zoom: 15, bearing: 0, viewingAngle: 0)
-        mapView.camera = GMSCameraPosition(target: coordinate , zoom: 10, bearing: 0, viewingAngle: 0)
+        mapView.camera = GMSCameraPosition(target: coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
         var marker = GMSMarker(position: coordinate)
         marker.title="Hello World"
