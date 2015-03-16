@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Map Tagger/DataManager.swift"
-            timestampString = "447665061.510721"
+            timestampString = "448196405.192766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "getCoordinateFromGMS(_:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "getInfoFromGMS(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Map Tagger/DataManager.swift"
-            timestampString = "447667396.554975"
+            timestampString = "448196405.192766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "getCoordinateFromGMS(_:)"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "getInfoFromGMS(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

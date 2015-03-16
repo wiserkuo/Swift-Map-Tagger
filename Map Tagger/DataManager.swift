@@ -55,7 +55,8 @@ class DataManager {
             }
         })
     }
-    class func getCoordinateFromGMS(address: String ) -> CLLocationCoordinate2D {
+    //class func getCoordinateFromGMS(address: String ) -> CLLocationCoordinate2D {
+    class func getInfoFromGMS(address:String) -> Marker {
         var latitude: Double!
         var longtitude: Double!
         var formatted_address: String!
@@ -114,8 +115,9 @@ class DataManager {
         }
         println("latitude=\(latitude) , longtitude=\(longtitude)")
         println("address=\(formatted_address)")
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude);
         
+        //return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude);
+        return Marker(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
         
 
        // return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude);

@@ -8,10 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController , CLLocationManagerDelegate{
+class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate{
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
+    var markerInfo:Marker!
     @IBAction func doneTableViewController(segue:UIStoryboardSegue){
+        
+    }
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        println("asdlhfkjadshk")
+        markersData.append(markerInfo)
         
     }
     @IBAction func searchAddressTapped(sender: AnyObject) {
@@ -34,15 +40,17 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
 
 
         }*/
-        var coordinate:CLLocationCoordinate2D!
-        coordinate=DataManager.getCoordinateFromGMS(addressTextField.text)
+        
+        //var coordinate:CLLocationCoordinate2D!
+       // coordinate=DataManager.getCoordinateFromGMS(addressTextField.text)
+        markerInfo=DataManager.getInfoFromGMS(addressTextField.text)
         //self.mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: 35.6894875 , longitude: 139.6917064 ) , zoom: 15, bearing: 0, viewingAngle: 0)
-        mapView.camera = GMSCameraPosition(target: coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+        mapView.camera = GMSCameraPosition(target: markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
-        var marker = GMSMarker(position: coordinate)
+        var marker = GMSMarker(position: markerInfo.coordinate)
         marker.title="Hello World"
         marker.map=self.mapView
-        marker.snippet="\(coordinate.latitude),\(coordinate.longitude)"
+        marker.snippet="\(markerInfo.coordinate.latitude),\(markerInfo.coordinate.longitude)"
     
         //print("wiser:\(latitude)\(longtitude)")
         // mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: latitude , longitude: longtitude ) , zoom: 15, bearing: 0, viewingAngle: 0)
@@ -92,7 +100,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        
+        mapView.delegate=self
 
     }
 
@@ -101,7 +109,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         // Dispose of any resources that can be recreated.
         
     }
-
+    
 
 }
 

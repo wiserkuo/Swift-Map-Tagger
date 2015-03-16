@@ -30,6 +30,7 @@
 		2D4155AE1A84B06E004B6A0E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4155AD1A84B06E004B6A0E /* OpenGLES.framework */; };
 		2D4155B01A84B07B004B6A0E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4155AF1A84B07B004B6A0E /* QuartzCore.framework */; };
 		2D4155B21A84B08C004B6A0E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4155B11A84B08C004B6A0E /* SystemConfiguration.framework */; };
+		2D5603EB1AB6E45900744C3D /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5603EA1AB6E45900744C3D /* SampleData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		2D4155AF1A84B07B004B6A0E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2D4155B11A84B08C004B6A0E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2D4155B51A84B27F004B6A0E /* Map Tagger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Map Tagger-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D5603EA1AB6E45900744C3D /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				2D2B595E1AA59B0E0074D11F /* DataManager.swift */,
 				2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */,
 				2D41557C1A84A571004B6A0E /* Main.storyboard */,
+				2D5603EA1AB6E45900744C3D /* SampleData.swift */,
 				2D115B731AB0346B005CCB1D /* Marker.swift */,
 				2D115B711AB02CB2005CCB1D /* TableViewController.swift */,
 				2D41557F1A84A571004B6A0E /* Images.xcassets */,
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */,
+				2D5603EB1AB6E45900744C3D /* SampleData.swift in Sources */,
 				2D2B595F1AA59B0E0074D11F /* DataManager.swift in Sources */,
 				2D41557B1A84A571004B6A0E /* ViewController.swift in Sources */,
 				2D115B721AB02CB2005CCB1D /* TableViewController.swift in Sources */,
