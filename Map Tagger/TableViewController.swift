@@ -10,8 +10,8 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
- 
-    
+    var selectMarker : Marker!
+    var selectIndex : NSIndexPath!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,12 +68,43 @@ class TableViewController: UITableViewController {
             // Delete the row from the data source
             markersData.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+        } else if editingStyle == .Insert{
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-
-
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
+        // 1
+        var locateAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Locate" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.selectIndex = indexPath
+            self.performSegueWithIdentifier("locateSegue", sender: self)
+            
+            // 2
+            //let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
+            //let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
+            //let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            //shareMenu.addAction(twitterAction)
+            //shareMenu.addAction(cancelAction)
+            //self.presentViewController(shareMenu, animated: true, completion: nil)
+        })
+        locateAction.backgroundColor=UIColor.greenColor()
+        // 3
+        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+            markersData.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            // 4
+            //let rateMenu = UIAlertController(title: nil, message: "Rate this App", preferredStyle: .ActionSheet)
+            //let appRateAction = UIAlertAction(title: "Rate", style: UIAlertActionStyle.Default, handler: nil)
+            //let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            //rateMenu.addAction(appRateAction)
+            //rateMenu.addAction(cancelAction)
+            //self.presentViewController(rateMenu, animated: true, completion: nil)
+        })
+        // 5
+        return [deleteAction,locateAction]
+    }
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
@@ -89,14 +120,20 @@ class TableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        super.prepareForSegue(segue, sender: sender)
+        if segue.identifier == "locateSegue" {
+           selectMarker = markersData[self.selectIndex.row]
+           
+        }
+        
     }
-    */
+    
 
 }

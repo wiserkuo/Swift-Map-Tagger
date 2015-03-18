@@ -13,12 +13,26 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     @IBOutlet weak var addressTextField: UITextField!
     var markerInfo:Marker!
     @IBAction func doneTableViewController(segue:UIStoryboardSegue){
+
+    }
+    @IBAction func locateTableViewController(segue:UIStoryboardSegue){
+        let tableViewController = segue.sourceViewController as TableViewController
+        let selectMarker = tableViewController.selectMarker
+        println("locateTableViewController")
+
+        mapView.camera = GMSCameraPosition(target: selectMarker.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+        mapView.clear()
+        var marker = GMSMarker(position: selectMarker.coordinate)
+        marker.title=selectMarker.address
+        marker.snippet="\(selectMarker.coordinate.latitude),\(selectMarker.coordinate.longitude)"
+        marker.map=self.mapView
+        
         
     }
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         println("asdlhfkjadshk")
         markersData.append(markerInfo)
-        
+
     }
     @IBAction func searchAddressTapped(sender: AnyObject) {
         println(addressTextField.text);
@@ -48,7 +62,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         mapView.camera = GMSCameraPosition(target: markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
         var marker = GMSMarker(position: markerInfo.coordinate)
-        marker.title="Hello World"
+        marker.title=markerInfo.address
         marker.map=self.mapView
         marker.snippet="\(markerInfo.coordinate.latitude),\(markerInfo.coordinate.longitude)"
     

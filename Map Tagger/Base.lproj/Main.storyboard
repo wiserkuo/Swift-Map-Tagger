@@ -190,11 +190,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="N1F-9S-8Ri" kind="unwind" identifier="locateSegue" unwindAction="locateTableViewController:" id="c8c-gu-z3D"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNM-F0-SCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="N1F-9S-8Ri" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="792" y="-390"/>
+            <point key="canvasLocation" x="759" y="-386.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rmY-HS-TZZ">
