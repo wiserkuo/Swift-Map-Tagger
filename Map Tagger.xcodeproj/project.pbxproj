@@ -31,6 +31,9 @@
 		2D4155B01A84B07B004B6A0E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4155AF1A84B07B004B6A0E /* QuartzCore.framework */; };
 		2D4155B21A84B08C004B6A0E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4155B11A84B08C004B6A0E /* SystemConfiguration.framework */; };
 		2D5603EB1AB6E45900744C3D /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5603EA1AB6E45900744C3D /* SampleData.swift */; };
+		2DB72FE81ABBDF2D006312BC /* MarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB72FE71ABBDF2D006312BC /* MarkerInfoWindow.swift */; };
+		2DB72FEA1ABBDFB9006312BC /* MarkerInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DB72FE91ABBDFB9006312BC /* MarkerInfoWindow.xib */; };
+		2DB72FEC1ABBE87F006312BC /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB72FEB1ABBE87F006312BC /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		2D4155B11A84B08C004B6A0E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2D4155B51A84B27F004B6A0E /* Map Tagger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Map Tagger-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D5603EA1AB6E45900744C3D /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		2DB72FE71ABBDF2D006312BC /* MarkerInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkerInfoWindow.swift; path = ../MarkerInfoWindow.swift; sourceTree = "<group>"; };
+		2DB72FE91ABBDFB9006312BC /* MarkerInfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MarkerInfoWindow.xib; path = ../MarkerInfoWindow.xib; sourceTree = "<group>"; };
+		2DB72FEB1ABBE87F006312BC /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,9 @@
 				2D5603EA1AB6E45900744C3D /* SampleData.swift */,
 				2D115B731AB0346B005CCB1D /* Marker.swift */,
 				2D115B711AB02CB2005CCB1D /* TableViewController.swift */,
+				2DB72FE71ABBDF2D006312BC /* MarkerInfoWindow.swift */,
+				2DB72FE91ABBDFB9006312BC /* MarkerInfoWindow.xib */,
+				2DB72FEB1ABBE87F006312BC /* UIViewExtension.swift */,
 				2D41557F1A84A571004B6A0E /* Images.xcassets */,
 				2D4155811A84A571004B6A0E /* LaunchScreen.xib */,
 				2D4155761A84A571004B6A0E /* Supporting Files */,
@@ -272,6 +281,7 @@
 				2D4155831A84A571004B6A0E /* LaunchScreen.xib in Resources */,
 				2D4155801A84A571004B6A0E /* Images.xcassets in Resources */,
 				2D41559C1A84AF4D004B6A0E /* GoogleMaps.bundle in Resources */,
+				2DB72FEA1ABBDFB9006312BC /* MarkerInfoWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +305,9 @@
 				2D41557B1A84A571004B6A0E /* ViewController.swift in Sources */,
 				2D115B721AB02CB2005CCB1D /* TableViewController.swift in Sources */,
 				2D4155791A84A571004B6A0E /* AppDelegate.swift in Sources */,
+				2DB72FEC1ABBE87F006312BC /* UIViewExtension.swift in Sources */,
 				2D115B741AB0346B005CCB1D /* Marker.swift in Sources */,
+				2DB72FE81ABBDF2D006312BC /* MarkerInfoWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

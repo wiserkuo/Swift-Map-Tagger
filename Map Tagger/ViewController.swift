@@ -12,6 +12,31 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
     var markerInfo:Marker!
+    func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
+        // 1
+        let placeMarker = marker as GMSMarker
+        
+        // 2
+        if let infoView = UIView.viewFromNibName("MarkerInfoWindow") as? MarkerInfoWindow {
+            infoView.addressLabel.text = markerInfo.address
+            infoView.coordinateLabel.text = "\(markerInfo.coordinate.latitude),\n\(markerInfo.coordinate.longitude)"
+            infoView.marker=markerInfo
+            // 3
+            //infoView.nameLabel.text = placeMarker.place.name
+            
+            // 4
+            //if let photo = placeMarker.place.photo {
+            //  infoView.placePhoto.image = photo
+            //} else {
+            //    infoView.placePhoto.image = UIImage(named: "generic")
+            // }
+            
+            return infoView
+        }
+        else {
+            return nil
+        }
+    }
     @IBAction func doneTableViewController(segue:UIStoryboardSegue){
 
     }
@@ -23,14 +48,14 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         mapView.camera = GMSCameraPosition(target: selectMarker.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
         var marker = GMSMarker(position: selectMarker.coordinate)
-        marker.title=selectMarker.address
-        marker.snippet="\(selectMarker.coordinate.latitude),\(selectMarker.coordinate.longitude)"
+     //   marker.title=selectMarker.address
+     //   marker.snippet="\(selectMarker.coordinate.latitude),\(selectMarker.coordinate.longitude)"
         marker.map=self.mapView
         
         
     }
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        println("asdlhfkjadshk")
+      //  println("asdlhfkjadshk")
         markersData.append(markerInfo)
 
     }
@@ -62,10 +87,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         mapView.camera = GMSCameraPosition(target: markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
         var marker = GMSMarker(position: markerInfo.coordinate)
-        marker.title=markerInfo.address
+       // marker.title=markerInfo.address
+        
+       // marker.snippet="\(markerInfo.coordinate.latitude),\(markerInfo.coordinate.longitude)"
         marker.map=self.mapView
-        marker.snippet="\(markerInfo.coordinate.latitude),\(markerInfo.coordinate.longitude)"
-    
         //print("wiser:\(latitude)\(longtitude)")
         // mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: latitude , longitude: longtitude ) , zoom: 15, bearing: 0, viewingAngle: 0)
         // 6 CLLocationCoordinate2D
@@ -109,6 +134,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             locationManager.stopUpdatingLocation()
         }
     }
+
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
