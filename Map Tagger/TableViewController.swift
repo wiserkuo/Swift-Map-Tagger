@@ -12,6 +12,13 @@ class TableViewController: UITableViewController {
 
     var selectMarker : Marker!
     var selectIndex : NSIndexPath!
+    @IBAction func cancelFromEdit(segue:UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func saveFromEdit(segue:UIStoryboardSegue) {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -127,12 +134,20 @@ class TableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        super.prepareForSegue(segue, sender: sender)
+        //super.prepareForSegue(segue, sender: sender)
+        println("segue=\(segue.identifier)")
         if segue.identifier == "locateSegue" {
            selectMarker = markersData[self.selectIndex.row]
            
         }
-        
+        if segue.identifier == "editMarkerSegue" {
+            
+           let editCellTableViewController = segue.destinationViewController as EditCellTableViewController
+            
+            println("index=\(self.tableView.indexPathForSelectedRow()?.row)")
+            editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
+            
+        }
     }
     
 
