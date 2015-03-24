@@ -11,10 +11,18 @@ import UIKit
 class EditCellTableViewController: UITableViewController {
     var selectedMarker : Marker!
  
-
+    @IBOutlet weak var coordinateLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var notesTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         println("selectedMarker=\(selectedMarker.address)")
+        coordinateLabel.text="\(selectedMarker.coordinate.latitude) ,\(selectedMarker.coordinate.longitude)"
+        addressLabel.text=selectedMarker.address
+        nameTextField.text=selectedMarker.name
+        notesTextField.text=selectedMarker.note
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,7 +36,7 @@ class EditCellTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+/*
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
@@ -40,7 +48,7 @@ class EditCellTableViewController: UITableViewController {
         // Return the number of rows in the section.
         return 0
     }
-
+*/
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
@@ -86,14 +94,21 @@ class EditCellTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "saveFromEditSegue" {
+            println("EditMarkerVC:prepareForSegue")
+            selectedMarker.name = self.nameTextField.text
+            selectedMarker.note = self.notesTextField.text
+            
+        }
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
     }
-    */
+    
 
 }

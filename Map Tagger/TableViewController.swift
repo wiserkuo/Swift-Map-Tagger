@@ -17,7 +17,11 @@ class TableViewController: UITableViewController {
     }
     
     @IBAction func saveFromEdit(segue:UIStoryboardSegue) {
-        
+        let editVC = segue.sourceViewController as EditCellTableViewController
+        self.selectIndex = self.tableView.indexPathForSelectedRow()
+        markersData[self.selectIndex.row].name=editVC.selectedMarker.name
+        markersData[self.selectIndex.row].note=editVC.selectedMarker.note
+        tableView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +58,9 @@ class TableViewController: UITableViewController {
 
         // Configure the cell...
         let marker = markersData[indexPath.row] as Marker
-        cell.textLabel?.text = marker.address
-        cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
+        cell.textLabel?.text = marker.name
+        cell.detailTextLabel?.text=marker.address
+       // cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
         return cell
     }
 
