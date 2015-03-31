@@ -56,7 +56,8 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     }
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
       //  println("asdlhfkjadshk")
-        markersData.append(markerInfo)
+
+        markersData.append(Marker(coordinate: markerInfo.coordinate, address: markerInfo.address))
 
     }
     @IBAction func searchAddressTapped(sender: AnyObject) {
