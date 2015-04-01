@@ -9,7 +9,7 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-
+    
     var selectMarker : Marker!
     var selectIndex : NSIndexPath!
     @IBAction func cancelFromEdit(segue:UIStoryboardSegue) {
@@ -22,10 +22,18 @@ class TableViewController: UITableViewController {
         markersData[self.selectIndex.row].name=editVC.selectedMarker.name
         markersData[self.selectIndex.row].note=editVC.selectedMarker.note
         tableView.reloadData()
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let date=NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+        components.month=2
+        
+        //println("let \(calendar.rangeOfUnit( .CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: calendar.dateFromComponents(components)!).length)")
+        
+        println("dsjifoidsfudsuffds \(components.year) \(components.month) \(components.day)")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
