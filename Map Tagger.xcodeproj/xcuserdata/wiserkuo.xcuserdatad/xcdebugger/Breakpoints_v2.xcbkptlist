@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Map Tagger/DataManager.swift"
-            timestampString = "448196405.192766"
+            timestampString = "449662656.629843"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "getInfoFromGMS(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Map Tagger/DataManager.swift"
-            timestampString = "448196405.192766"
+            timestampString = "450089398.811174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "getInfoFromGMS(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MarkerInfoWindow.swift"
-            timestampString = "448530727.076255"
+            timestampString = "450090026.881426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "MarkerInfoWindow"
             landmarkType = "3">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MarkerInfoWindow.swift"
-            timestampString = "448530727.076255"
+            timestampString = "450090026.881426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
             landmarkName = "MarkerInfoWindow"
             landmarkType = "3">
          </BreakpointContent>
@@ -74,13 +74,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Map Tagger/ViewController.swift"
-            timestampString = "449478094.63275"
+            timestampString = "449661927.47605"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "mapView(_:didTapInfoWindowOfMarker:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Map Tagger/Marker.swift"
+            timestampString = "449649197.446978"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "Marker"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

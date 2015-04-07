@@ -10,13 +10,6 @@ import UIKit
 class MarkerInfoWindow: UIView {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var coordinateLabel: UILabel!
-    var marker: Marker!
-
-
-    @IBAction func addTapped(sender: UIButton) {
-        println("dsaijfidogoifdoig")
-        markersData.append(marker)
-    }
     
     
 }

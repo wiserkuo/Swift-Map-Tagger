@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D115B721AB02CB2005CCB1D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D115B711AB02CB2005CCB1D /* TableViewController.swift */; };
-		2D115B741AB0346B005CCB1D /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D115B731AB0346B005CCB1D /* Marker.swift */; };
+		2D26B6571ACD2D900075E6BF /* Map_Tagger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */; };
+		2D26B65D1ACD50750075E6BF /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26B65C1ACD50750075E6BF /* Marker.swift */; };
 		2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */; };
 		2D2B595F1AA59B0E0074D11F /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B595E1AA59B0E0074D11F /* DataManager.swift */; };
 		2D4155791A84A571004B6A0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4155781A84A571004B6A0E /* AppDelegate.swift */; };
@@ -49,7 +50,8 @@
 
 /* Begin PBXFileReference section */
 		2D115B711AB02CB2005CCB1D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		2D115B731AB0346B005CCB1D /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
+		2D26B6561ACD2D900075E6BF /* Map_Tagger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Map_Tagger.xcdatamodel; sourceTree = "<group>"; };
+		2D26B65C1ACD50750075E6BF /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Marker.swift; path = ../Marker.swift; sourceTree = "<group>"; };
 		2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		2D2B595E1AA59B0E0074D11F /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2D4155731A84A571004B6A0E /* Map Tagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Map Tagger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,14 +138,15 @@
 		2D4155751A84A571004B6A0E /* Map Tagger */ = {
 			isa = PBXGroup;
 			children = (
+				2D26B65C1ACD50750075E6BF /* Marker.swift */,
 				2D4155781A84A571004B6A0E /* AppDelegate.swift */,
+				2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */,
 				2D41557A1A84A571004B6A0E /* ViewController.swift */,
 				2D115B711AB02CB2005CCB1D /* TableViewController.swift */,
 				2D939F6A1ABFFF6700596520 /* EditCellTableViewController.swift */,
 				2D2B595E1AA59B0E0074D11F /* DataManager.swift */,
 				2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */,
 				2D5603EA1AB6E45900744C3D /* SampleData.swift */,
-				2D115B731AB0346B005CCB1D /* Marker.swift */,
 				2DB72FE71ABBDF2D006312BC /* MarkerInfoWindow.swift */,
 				2DB72FE91ABBDFB9006312BC /* MarkerInfoWindow.xib */,
 				2DB72FEB1ABBE87F006312BC /* UIViewExtension.swift */,
@@ -305,13 +308,14 @@
 			files = (
 				2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */,
 				2D5603EB1AB6E45900744C3D /* SampleData.swift in Sources */,
+				2D26B65D1ACD50750075E6BF /* Marker.swift in Sources */,
 				2D2B595F1AA59B0E0074D11F /* DataManager.swift in Sources */,
 				2D41557B1A84A571004B6A0E /* ViewController.swift in Sources */,
 				2D115B721AB02CB2005CCB1D /* TableViewController.swift in Sources */,
 				2D4155791A84A571004B6A0E /* AppDelegate.swift in Sources */,
 				2DB72FEC1ABBE87F006312BC /* UIViewExtension.swift in Sources */,
 				2D939F6B1ABFFF6700596520 /* EditCellTableViewController.swift in Sources */,
-				2D115B741AB0346B005CCB1D /* Marker.swift in Sources */,
+				2D26B6571ACD2D900075E6BF /* Map_Tagger.xcdatamodeld in Sources */,
 				2DB72FE81ABBDF2D006312BC /* MarkerInfoWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +537,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2D26B6561ACD2D900075E6BF /* Map_Tagger.xcdatamodel */,
+			);
+			currentVersion = 2D26B6561ACD2D900075E6BF /* Map_Tagger.xcdatamodel */;
+			path = Map_Tagger.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2D41556B1A84A571004B6A0E /* Project object */;
 }

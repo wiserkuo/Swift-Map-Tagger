@@ -7,11 +7,21 @@
 //
 
 import UIKit
-
+import CoreData
 class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate{
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
-    var markerInfo:Marker!
+    var markerInfo:MarkerModel!
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Marker")
+        var error:NSError?
+        markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as [Marker]
+        if error != nil {
+            println("Failed ti retrieve record: \(error!.localizedDescription)")
+        }
+    }
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
         let placeMarker = marker as GMSMarker
@@ -19,8 +29,8 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         // 2
         if let infoView = UIView.viewFromNibName("MarkerInfoWindow") as? MarkerInfoWindow {
             infoView.addressLabel.text = markerInfo.address
-            infoView.coordinateLabel.text = "\(markerInfo.coordinate.latitude),\n\(markerInfo.coordinate.longitude)"
-            infoView.marker=markerInfo
+            infoView.coordinateLabel.text = "\(markerInfo.coordinate.latitude ),\n\(markerInfo.coordinate.longitude)"
+            //infoView.marker=markerInfo
             // 3
             //infoView.nameLabel.text = placeMarker.place.name
             
@@ -45,20 +55,30 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         let selectMarker = tableViewController.selectMarker
         println("locateTableViewController")
 
-        mapView.camera = GMSCameraPosition(target: selectMarker.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+        mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: selectMarker.latitude, longitude: selectMarker.longtitude) , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
-        var marker = GMSMarker(position: selectMarker.coordinate)
-     //   marker.title=selectMarker.address
-     //   marker.snippet="\(selectMarker.coordinate.latitude),\(selectMarker.coordinate.longitude)"
+        var marker = GMSMarker(position: CLLocationCoordinate2D(latitude: selectMarker.latitude, longitude: selectMarker.longtitude))
+     // marker.title=selectMarker.address
+     // marker.snippet="\(selectMarker.coordinate.latitude),\(selectMarker.coordinate.longitude)"
         marker.map=self.mapView
-        
-        
     }
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-      //  println("asdlhfkjadshk")
-
-        markersData.append(Marker(coordinate: markerInfo.coordinate, address: markerInfo.address))
-
+        //markersData.append(Marker(coordinate: markerInfo.coordinate, address: markerInfo.address))
+        //CoreData
+        var marker : Marker
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext{
+                marker = NSEntityDescription.insertNewObjectForEntityForName("Marker", inManagedObjectContext: managedObjectContext) as Marker
+                marker.name = "Neww Place"
+                marker.address = markerInfo.address
+                marker.longtitude = markerInfo.coordinate.longitude
+                marker.latitude = markerInfo.coordinate.latitude
+                marker.note = ""
+                var e: NSError?
+                if !managedObjectContext.save(&e){
+                    println("inser error: \(e!.localizedDescription)")
+                return
+            }
+        }
     }
     @IBAction func searchAddressTapped(sender: AnyObject) {
         println(addressTextField.text);
@@ -84,6 +104,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //var coordinate:CLLocationCoordinate2D!
        // coordinate=DataManager.getCoordinateFromGMS(addressTextField.text)
         markerInfo=DataManager.getInfoFromGMS(addressTextField.text)
+        println("getInfoFromGMS")
         //self.mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: 35.6894875 , longitude: 139.6917064 ) , zoom: 15, bearing: 0, viewingAngle: 0)
         mapView.camera = GMSCameraPosition(target: markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()

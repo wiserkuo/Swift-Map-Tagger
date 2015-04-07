@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 let TopAppURL = "https://itunes.apple.com/us/rss/topgrossingipadapplications/limit=25/json"
 let GMSURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
 class DataManager {
@@ -56,7 +57,7 @@ class DataManager {
         })
     }
     //class func getCoordinateFromGMS(address: String ) -> CLLocationCoordinate2D {
-    class func getInfoFromGMS(address:String) -> Marker {
+    class func getInfoFromGMS(address:String) -> MarkerModel{
         var latitude: Double!
         var longtitude: Double!
         var formatted_address: String!
@@ -115,10 +116,19 @@ class DataManager {
         }
         println("latitude=\(latitude) , longtitude=\(longtitude)")
         println("address=\(formatted_address)")
+        println("jsafkhdsfglfa")
+        var marker : MarkerModel!
+        println("asdffdgdsg")
+        marker = MarkerModel(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
+        println("qwefasf")
+        marker.name = "New Places"
+        marker.note = ""
+      //  marker.latitude = latitude
+      //  marker.longtitude = longtitude
         
         //return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude);
-        return Marker(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
-        
+        //return Marker(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
+        return marker
 
        // return CLLocationCoordinate2D(latitude: latitude, longitude: longtitude);
     }

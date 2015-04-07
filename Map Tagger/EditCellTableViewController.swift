@@ -18,7 +18,7 @@ class EditCellTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         println("selectedMarker=\(selectedMarker.address)")
-        coordinateLabel.text="\(selectedMarker.coordinate.latitude) ,\(selectedMarker.coordinate.longitude)"
+        coordinateLabel.text="\(selectedMarker.latitude) ,\(selectedMarker.longtitude)"
         addressLabel.text=selectedMarker.address
         nameTextField.text=selectedMarker.name
         notesTextField.text=selectedMarker.note

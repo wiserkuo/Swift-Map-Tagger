@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+import CoreData
 class TableViewController: UITableViewController {
-    
+    // Retreive the managedObjectContext from AppDelegate
+
     var selectMarker : Marker!
     var selectIndex : NSIndexPath!
     @IBAction func cancelFromEdit(segue:UIStoryboardSegue) {
@@ -19,10 +20,29 @@ class TableViewController: UITableViewController {
     @IBAction func saveFromEdit(segue:UIStoryboardSegue) {
         let editVC = segue.sourceViewController as EditCellTableViewController
         self.selectIndex = self.tableView.indexPathForSelectedRow()
-        markersData[self.selectIndex.row].name=editVC.selectedMarker.name
-        markersData[self.selectIndex.row].note=editVC.selectedMarker.note
+      //  markersData[self.selectIndex.row].name=editVC.selectedMarker.name
+      //  markersData[self.selectIndex.row].note=editVC.selectedMarker.note
         tableView.reloadData()
         
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let managedObjectContext = appDelegate.managedObjectContext!
+        let fetchRequest = NSFetchRequest(entityName: "Marker")
+        var error:NSError?
+        let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as [Marker]?
+        if let results = fetchResults {
+            markersData = results
+        }
+        else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+        //if error != nil {
+        //    println("Failed ti retrieve record: \(error!.localizedDescription)")
+        //}
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +78,7 @@ class TableViewController: UITableViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return markersData.count
+        
     }
 
     
@@ -66,8 +87,8 @@ class TableViewController: UITableViewController {
 
         // Configure the cell...
         let marker = markersData[indexPath.row] as Marker
-        cell.textLabel?.text = marker.name
-        cell.detailTextLabel?.text=marker.address
+        cell.textLabel!.text = marker.valueForKey("name") as String?
+        cell.detailTextLabel!.text=marker.valueForKey("address") as String?
        // cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
         return cell
     }
@@ -150,7 +171,7 @@ class TableViewController: UITableViewController {
         //super.prepareForSegue(segue, sender: sender)
         println("segue=\(segue.identifier)")
         if segue.identifier == "locateSegue" {
-           selectMarker = markersData[self.selectIndex.row]
+         //  selectMarker = markersData[self.selectIndex.row]
            
         }
         if segue.identifier == "editMarkerSegue" {
@@ -158,7 +179,7 @@ class TableViewController: UITableViewController {
            let editCellTableViewController = segue.destinationViewController as EditCellTableViewController
             
             println("index=\(self.tableView.indexPathForSelectedRow()?.row)")
-            editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
+           // editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
             
         }
     }

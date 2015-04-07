@@ -142,7 +142,7 @@
             </objects>
             <point key="canvasLocation" x="-1059" y="-390"/>
         </scene>
-        <!--Markers Book-->
+        <!--Table View Controller-->
         <scene sceneID="i8X-gB-c6s">
             <objects>
                 <tableViewController id="Kog-YH-4gu" customClass="TableViewController" customModule="Map_Tagger" customModuleProvider="target" sceneMemberID="viewController">
@@ -186,7 +186,7 @@
                             <outlet property="delegate" destination="Kog-YH-4gu" id="wpg-5H-Gc8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Markers Book" id="MHX-lr-qkd">
+                    <navigationItem key="navigationItem" id="MHX-lr-qkd">
                         <barButtonItem key="leftBarButtonItem" title="Map" style="done" id="k8M-U2-Hb5">
                             <connections>
                                 <segue destination="N1F-9S-8Ri" kind="unwind" unwindAction="doneTableViewController:" id="gIP-O0-L2Z"/>
