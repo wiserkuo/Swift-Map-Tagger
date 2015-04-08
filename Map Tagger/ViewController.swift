@@ -12,15 +12,20 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
     var markerInfo:MarkerModel!
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Marker")
         var error:NSError?
         markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as [Marker]
         if error != nil {
             println("Failed ti retrieve record: \(error!.localizedDescription)")
         }
+        //markersData[0].setValue("firstt", forKey: "name")
+        //managedObjectContext?.save(&error)
+        
+        println("viewWillAppear")
+        
     }
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
@@ -66,20 +71,23 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //markersData.append(Marker(coordinate: markerInfo.coordinate, address: markerInfo.address))
         //CoreData
         var marker : Marker
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext{
-                marker = NSEntityDescription.insertNewObjectForEntityForName("Marker", inManagedObjectContext: managedObjectContext) as Marker
-                marker.name = "Neww Place"
-                marker.address = markerInfo.address
-                marker.longtitude = markerInfo.coordinate.longitude
-                marker.latitude = markerInfo.coordinate.latitude
-                marker.note = ""
-                var e: NSError?
-                if !managedObjectContext.save(&e){
-                    println("inser error: \(e!.localizedDescription)")
-                return
-            }
+        marker = NSEntityDescription.insertNewObjectForEntityForName("Marker", inManagedObjectContext: managedObjectContext!) as Marker
+        marker.name = "New Place"
+        marker.address = markerInfo.address
+        marker.longtitude = markerInfo.coordinate.longitude
+        marker.latitude = markerInfo.coordinate.latitude
+        marker.note = ""
+        var e: NSError?
+        if !managedObjectContext!.save(&e){
+            println("inser error: \(e!.localizedDescription)")
+            return
         }
+      //  if let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext{
+
+       // }
+
     }
+
     @IBAction func searchAddressTapped(sender: AnyObject) {
         println(addressTextField.text);
 

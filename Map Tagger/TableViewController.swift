@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 class TableViewController: UITableViewController {
     // Retreive the managedObjectContext from AppDelegate
-
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
     var selectMarker : Marker!
     var selectIndex : NSIndexPath!
     @IBAction func cancelFromEdit(segue:UIStoryboardSegue) {
@@ -20,22 +20,26 @@ class TableViewController: UITableViewController {
     @IBAction func saveFromEdit(segue:UIStoryboardSegue) {
         let editVC = segue.sourceViewController as EditCellTableViewController
         self.selectIndex = self.tableView.indexPathForSelectedRow()
-      //  markersData[self.selectIndex.row].name=editVC.selectedMarker.name
-      //  markersData[self.selectIndex.row].note=editVC.selectedMarker.note
+        markersData[self.selectIndex.row].name=editVC.selectedMarker.name
+        markersData[self.selectIndex.row].note=editVC.selectedMarker.note
+        var e: NSError?
+        if !managedObjectContext.save(&e){
+            println("inser error: \(e!.localizedDescription)")
+            return
+        }
         tableView.reloadData()
         
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate =
-        UIApplication.sharedApplication().delegate as AppDelegate
         
-        let managedObjectContext = appDelegate.managedObjectContext!
+
         let fetchRequest = NSFetchRequest(entityName: "Marker")
         var error:NSError?
         let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as [Marker]?
         if let results = fetchResults {
             markersData = results
+            
         }
         else {
             println("Could not fetch \(error), \(error!.userInfo)")
@@ -86,7 +90,7 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("MarkerCell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
-        let marker = markersData[indexPath.row] as Marker
+        let marker = markersData[indexPath.row] 
         cell.textLabel!.text = marker.valueForKey("name") as String?
         cell.detailTextLabel!.text=marker.valueForKey("address") as String?
        // cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
@@ -131,8 +135,15 @@ class TableViewController: UITableViewController {
         locateAction.backgroundColor=UIColor.greenColor()
         // 3
         var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            
-            markersData.removeAtIndex(indexPath.row)
+
+            println("indexPath=\(indexPath.row)")
+            self.managedObjectContext.deleteObject(markersData[indexPath.row]) //delete coredata
+            markersData.removeAtIndex(indexPath.row)                           //then delete tableview data source , or the index will wrong
+            var e: NSError?
+            if !self.managedObjectContext.save(&e){
+                println("inser error: \(e!.localizedDescription)")
+                return
+            }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             
             // 4
@@ -171,7 +182,7 @@ class TableViewController: UITableViewController {
         //super.prepareForSegue(segue, sender: sender)
         println("segue=\(segue.identifier)")
         if segue.identifier == "locateSegue" {
-         //  selectMarker = markersData[self.selectIndex.row]
+           selectMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
            
         }
         if segue.identifier == "editMarkerSegue" {
@@ -179,7 +190,8 @@ class TableViewController: UITableViewController {
            let editCellTableViewController = segue.destinationViewController as EditCellTableViewController
             
             println("index=\(self.tableView.indexPathForSelectedRow()?.row)")
-           // editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
+           
+            editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
             
         }
     }
