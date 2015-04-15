@@ -12,12 +12,12 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
     var markerInfo:MarkerModel!
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         let fetchRequest = NSFetchRequest(entityName: "Marker")
         var error:NSError?
-        markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as [Marker]
+        markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as![Marker]
         if error != nil {
             println("Failed ti retrieve record: \(error!.localizedDescription)")
         }
@@ -29,7 +29,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     }
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
-        let placeMarker = marker as GMSMarker
+        let placeMarker = marker 
         
         // 2
         if let infoView = UIView.viewFromNibName("MarkerInfoWindow") as? MarkerInfoWindow {
@@ -56,7 +56,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
 
     }
     @IBAction func locateTableViewController(segue:UIStoryboardSegue){
-        let tableViewController = segue.sourceViewController as TableViewController
+        let tableViewController = segue.sourceViewController as!TableViewController
         let selectMarker = tableViewController.selectMarker
         println("locateTableViewController")
 
@@ -71,7 +71,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //markersData.append(Marker(coordinate: markerInfo.coordinate, address: markerInfo.address))
         //CoreData
         var marker : Marker
-        marker = NSEntityDescription.insertNewObjectForEntityForName("Marker", inManagedObjectContext: managedObjectContext!) as Marker
+        marker = NSEntityDescription.insertNewObjectForEntityForName("Marker", inManagedObjectContext: managedObjectContext!) as!Marker
         marker.name = "New Place"
         marker.address = markerInfo.address
         marker.longtitude = markerInfo.coordinate.longitude
@@ -82,7 +82,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             println("inser error: \(e!.localizedDescription)")
             return
         }
-      //  if let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext{
+      //  if let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext{
 
        // }
 
@@ -127,7 +127,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
 
     }
     @IBAction func mapTypeSegmentPressed(sender: AnyObject) {
-        let segmentedControl = sender as UISegmentedControl
+        let segmentedControl = sender as!UISegmentedControl
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             mapView.mapType = kGMSTypeNormal

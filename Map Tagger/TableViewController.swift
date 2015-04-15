@@ -10,15 +10,94 @@ import UIKit
 import CoreData
 class TableViewController: UITableViewController {
     // Retreive the managedObjectContext from AppDelegate
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
     var selectMarker : Marker!
     var selectIndex : NSIndexPath!
+    var datePicker : UIDatePicker!
+    func createDatePickerViewWithAlertController()
+    {
+        var viewDatePicker: UIView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 200))
+        viewDatePicker.backgroundColor = UIColor.clearColor()
+        self.datePicker = UIDatePicker(frame: CGRectMake(0, 0, self.view.frame.size.width, 200))
+        self.datePicker.datePickerMode = UIDatePickerMode.Date
+        //self.datePicker.addTarget(self, action: "datePickerSelected", forControlEvents: UIControlEvents.ValueChanged)
+        viewDatePicker.addSubview(self.datePicker)
+        if(UIDevice.currentDevice().systemVersion >= "8.0")
+        {
+            
+            let alertController = UIAlertController(title: nil, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alertController.view.addSubview(viewDatePicker)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel)
+                { (action) in
+                    // ...
+            }
+            alertController.addAction(cancelAction)
+            let OKAction = UIAlertAction(title: "Done", style: .Default)
+                { (action) in
+                    
+                    self.dateSelected()
+            }
+            alertController.addAction(OKAction)
+            /*
+            let destroyAction = UIAlertAction(title: "Destroy", style: .Destructive)
+            { (action) in
+            println(action)
+            }
+            alertController.addAction(destroyAction)
+            */
+            self.presentViewController(alertController, animated: true)
+                {
+                    // ...
+            }
+        }
+        else
+        {
+           // let actionSheet = UIActionSheet(title: "\n\n\n\n\n\n\n\n\n\n", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Done")
+           // actionSheet.addSubview(viewDatePicker)
+           // actionSheet.showInView(self.view)
+        }
+        
+    }
+    func dateformatterDateTime(date: NSDate) -> NSString
+    {
+        var dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.stringFromDate(date)
+    }
+    func dateSelected()
+    {
+        var selectedDate: String = String()
+        selectedDate = self.dateformatterDateTime(datePicker.date) as String
+        self.title = selectedDate
+       // self.textFieldFromDate.text =  selectedDate
+        
+    }
+
+    @IBAction func selectDate(sender: AnyObject) {
+        createDatePickerViewWithAlertController()
+        /*let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            println(action)
+        }
+        alertController.addAction(cancelAction)
+        
+        let destroyAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            println(action)
+        }
+        alertController.addAction(destroyAction)
+        
+        self.presentViewController(alertController, animated: true) {
+            // ...
+        }*/
+    }
     @IBAction func cancelFromEdit(segue:UIStoryboardSegue) {
         
     }
     
     @IBAction func saveFromEdit(segue:UIStoryboardSegue) {
-        let editVC = segue.sourceViewController as EditCellTableViewController
+        let editVC = segue.sourceViewController as! EditCellTableViewController
         self.selectIndex = self.tableView.indexPathForSelectedRow()
         markersData[self.selectIndex.row].name=editVC.selectedMarker.name
         markersData[self.selectIndex.row].note=editVC.selectedMarker.note
@@ -36,7 +115,7 @@ class TableViewController: UITableViewController {
 
         let fetchRequest = NSFetchRequest(entityName: "Marker")
         var error:NSError?
-        let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as [Marker]?
+        let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Marker]?
         if let results = fetchResults {
             markersData = results
             
@@ -54,6 +133,14 @@ class TableViewController: UITableViewController {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
         components.month=2
+        
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        self.title=dateFormatter.stringFromDate(date)
+        
+            //navigationBar.title=dateFormatter.stringFromDate(date)
+        //var strDate = dateFormatter.stringFromDate(datepicker.date)
+   //     self.label.text = strDate
         
         //println("let \(calendar.rangeOfUnit( .CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: calendar.dateFromComponents(components)!).length)")
         
@@ -87,12 +174,12 @@ class TableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MarkerCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MarkerCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
         let marker = markersData[indexPath.row] 
-        cell.textLabel!.text = marker.valueForKey("name") as String?
-        cell.detailTextLabel!.text=marker.valueForKey("address") as String?
+        cell.textLabel!.text = marker.valueForKey("name") as! String?
+        cell.detailTextLabel!.text=marker.valueForKey("address") as! String?
        // cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
         return cell
     }
@@ -182,13 +269,13 @@ class TableViewController: UITableViewController {
         //super.prepareForSegue(segue, sender: sender)
         println("segue=\(segue.identifier)")
         if segue.identifier == "locateSegue" {
-           selectMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
+          //  println("row\(self.tableView.indexPathForSelectedRow()?.row)")
+           selectMarker = markersData[self.selectIndex.row]
            
         }
         if segue.identifier == "editMarkerSegue" {
             
-           let editCellTableViewController = segue.destinationViewController as EditCellTableViewController
-            
+           let editCellTableViewController = segue.destinationViewController as! EditCellTableViewController
             println("index=\(self.tableView.indexPathForSelectedRow()?.row)")
            
             editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
