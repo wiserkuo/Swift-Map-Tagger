@@ -21,6 +21,7 @@ class TableViewController: UITableViewController {
         viewDatePicker.backgroundColor = UIColor.clearColor()
         self.datePicker = UIDatePicker(frame: CGRectMake(0, 0, self.view.frame.size.width, 200))
         self.datePicker.datePickerMode = UIDatePickerMode.Date
+        
         //self.datePicker.addTarget(self, action: "datePickerSelected", forControlEvents: UIControlEvents.ValueChanged)
         viewDatePicker.addSubview(self.datePicker)
         if(UIDevice.currentDevice().systemVersion >= "8.0")
@@ -39,6 +40,7 @@ class TableViewController: UITableViewController {
                 { (action) in
                     
                     self.dateSelected()
+                    println("Done selectedDate=\(selectedDate)")
             }
             alertController.addAction(OKAction)
             
@@ -70,11 +72,24 @@ class TableViewController: UITableViewController {
     }
     func dateSelected()
     {
-        var selectedDate: String = String()
+       // var selectedDate: String = String()
         selectedDate = self.dateformatterDateTime(datePicker.date) as String
         self.title = selectedDate
-       // self.textFieldFromDate.text =  selectedDate
         
+        let fetchRequest = NSFetchRequest(entityName: "Marker")
+        var error:NSError?
+        
+        let pred = NSPredicate(format: "(date = %@)", "\(selectedDate)")
+        fetchRequest.predicate = pred
+        
+        let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Marker]?
+        if let results = fetchResults {
+            markersData = results
+            
+        }
+        self.tableView.reloadData()
+       // self.textFieldFromDate.text =  selectedDate
+       println("dateSelected() selectedDate=\(selectedDate)")
     }
 
     @IBAction func selectDate(sender: AnyObject) {
@@ -115,9 +130,19 @@ class TableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-
+println("selectedDate1=\(selectedDate)")
         let fetchRequest = NSFetchRequest(entityName: "Marker")
         var error:NSError?
+        
+        if selectedDate == nil {
+          var dateFormatter = NSDateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd"
+          selectedDate = dateFormatter.stringFromDate(NSDate())
+          
+        }
+        let pred = NSPredicate(format: "(date = %@)", "\(selectedDate)")
+        fetchRequest.predicate = pred
+        
         let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [Marker]?
         if let results = fetchResults {
             markersData = results
@@ -126,6 +151,8 @@ class TableViewController: UITableViewController {
         else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
+        println("selectedDate2=\(selectedDate)")
+        self.title=selectedDate
         //if error != nil {
         //    println("Failed ti retrieve record: \(error!.localizedDescription)")
         //}
@@ -137,9 +164,9 @@ class TableViewController: UITableViewController {
         let components = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
         components.month=2
         
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        self.title=dateFormatter.stringFromDate(date)
+      //  var dateFormatter = NSDateFormatter()
+      //  dateFormatter.dateFormat = "yyyy-MM-dd"
+      //  self.title=dateFormatter.stringFromDate(date)
         
             //navigationBar.title=dateFormatter.stringFromDate(date)
         //var strDate = dateFormatter.stringFromDate(datepicker.date)

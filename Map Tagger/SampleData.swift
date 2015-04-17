@@ -7,3 +7,4 @@
 //
 import CoreData
 var markersData:[Marker] = []
+var selectedDate:String!

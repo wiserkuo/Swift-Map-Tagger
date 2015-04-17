@@ -15,18 +15,23 @@ class Marker: NSManagedObject {
     @NSManaged var longtitude: Double
     @NSManaged var address: String
     @NSManaged var note: String
-
+    @NSManaged var date: String
 }
 class MarkerModel: NSObject {
     var name:String
     var coordinate:CLLocationCoordinate2D
     var address:String
     var note: String
+    var date: String
     init(coordinate:CLLocationCoordinate2D , address:String){
         self.name = "New Place"
         self.address = address
         self.coordinate = coordinate
         self.note = ""
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        self.date = dateFormatter.stringFromDate(NSDate())
+        
         super.init()
     }
 }

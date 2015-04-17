@@ -15,15 +15,27 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        println("sselectedDate1=\(selectedDate)")
         let fetchRequest = NSFetchRequest(entityName: "Marker")
         var error:NSError?
+        
+        if selectedDate == nil {
+          var dateFormatter = NSDateFormatter()
+          dateFormatter.dateFormat = "yyyy-MM-dd"
+          selectedDate = dateFormatter.stringFromDate(NSDate())
+          
+        }
+        let pred = NSPredicate(format: "(date = %@)", "\(selectedDate)")
+        fetchRequest.predicate = pred
+        
         markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as![Marker]
+        
         if error != nil {
             println("Failed ti retrieve record: \(error!.localizedDescription)")
         }
         //markersData[0].setValue("firstt", forKey: "name")
         //managedObjectContext?.save(&error)
-        
+        println("sselectedDate2=\(selectedDate)")
         println("viewWillAppear")
         
     }
@@ -77,6 +89,11 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         marker.longtitude = markerInfo.coordinate.longitude
         marker.latitude = markerInfo.coordinate.latitude
         marker.note = ""
+        //var dateFormatter = NSDateFormatter()
+        //dateFormatter.dateFormat = "yyyy-MM-dd"
+        //var dateString = dateFormatter.stringFromDate(NSDate())
+        marker.date=selectedDate
+        println("selectedDate=\(selectedDate)")
         var e: NSError?
         if !managedObjectContext!.save(&e){
             println("inser error: \(e!.localizedDescription)")
