@@ -28,17 +28,20 @@ class TableViewController: UITableViewController {
             
             let alertController = UIAlertController(title: nil, message: "\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.ActionSheet)
             alertController.view.addSubview(viewDatePicker)
+            
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel)
                 { (action) in
                     // ...
             }
             alertController.addAction(cancelAction)
+            
             let OKAction = UIAlertAction(title: "Done", style: .Default)
                 { (action) in
                     
                     self.dateSelected()
             }
             alertController.addAction(OKAction)
+            
             /*
             let destroyAction = UIAlertAction(title: "Destroy", style: .Destructive)
             { (action) in
