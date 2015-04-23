@@ -23,8 +23,8 @@ class MarkerModel: NSObject {
     var address:String
     var note: String
     var date: String
-    init(coordinate:CLLocationCoordinate2D , address:String){
-        self.name = "New Place"
+    init(name:String , coordinate:CLLocationCoordinate2D , address:String){
+        self.name = name
         self.address = address
         self.coordinate = coordinate
         self.note = ""

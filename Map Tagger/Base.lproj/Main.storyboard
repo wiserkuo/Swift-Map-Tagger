@@ -33,10 +33,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pt-HW-faH" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UZj-an-HHX">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -55,6 +51,17 @@
                                     <action selector="searchAddressTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aJQ-UP-257"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pt-HW-faH" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfs-Jq-ICy" userLabel="Search Bar View">
+                                <rect key="frame" x="10" y="74" width="580" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tmf-CA-wJe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,8 +72,11 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="7Pt-HW-faH" secondAttribute="bottom" id="Lub-JE-czC"/>
                             <constraint firstItem="UZj-an-HHX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="10" id="Ng6-pG-VbE"/>
                             <constraint firstItem="7Pt-HW-faH" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="QhC-Ph-uJk"/>
+                            <constraint firstItem="hfs-Jq-ICy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="TKB-W5-VAB"/>
                             <constraint firstAttribute="trailing" secondItem="7Pt-HW-faH" secondAttribute="trailing" id="VOa-Rz-O6B"/>
+                            <constraint firstItem="hfs-Jq-ICy" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="10" id="YrI-ia-Wfb"/>
                             <constraint firstAttribute="trailing" secondItem="7Pt-HW-faH" secondAttribute="trailing" id="cWE-aE-aIR"/>
+                            <constraint firstAttribute="trailing" secondItem="hfs-Jq-ICy" secondAttribute="trailing" constant="10" id="nBn-hL-Cjo"/>
                             <constraint firstItem="v4C-Rl-GTc" firstAttribute="leading" secondItem="UZj-an-HHX" secondAttribute="trailing" constant="10" id="rIU-v8-mgi"/>
                             <constraint firstItem="7Pt-HW-faH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="t61-xu-yHL"/>
                             <constraint firstItem="v4C-Rl-GTc" firstAttribute="leading" secondItem="UZj-an-HHX" secondAttribute="trailing" constant="16" id="tBn-Sn-RXt"/>
@@ -79,16 +89,16 @@
                                 <exclude reference="v4C-Rl-GTc"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Lub-JE-czC"/>
-                                <exclude reference="Ng6-pG-VbE"/>
-                                <exclude reference="tvQ-Yl-935"/>
+                                <exclude reference="QhC-Ph-uJk"/>
+                                <exclude reference="VOa-Rz-O6B"/>
+                                <exclude reference="t61-xu-yHL"/>
                                 <exclude reference="K8L-rj-c76"/>
                                 <exclude reference="LUo-6Z-bw9"/>
                                 <exclude reference="rIU-v8-mgi"/>
                                 <exclude reference="tBn-Sn-RXt"/>
-                                <exclude reference="QhC-Ph-uJk"/>
-                                <exclude reference="VOa-Rz-O6B"/>
-                                <exclude reference="t61-xu-yHL"/>
+                                <exclude reference="Ng6-pG-VbE"/>
+                                <exclude reference="tvQ-Yl-935"/>
+                                <exclude reference="Lub-JE-czC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -97,20 +107,20 @@
                                 <include reference="v4C-Rl-GTc"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Kjh-Cu-o2f"/>
-                                <include reference="Lub-JE-czC"/>
-                                <include reference="Ng6-pG-VbE"/>
-                                <include reference="tvQ-Yl-935"/>
-                                <include reference="K8L-rj-c76"/>
-                                <include reference="LUo-6Z-bw9"/>
-                                <include reference="rIU-v8-mgi"/>
-                                <include reference="tBn-Sn-RXt"/>
                                 <exclude reference="6OF-oR-XzS"/>
                                 <include reference="QhC-Ph-uJk"/>
                                 <include reference="VOa-Rz-O6B"/>
                                 <exclude reference="cWE-aE-aIR"/>
                                 <include reference="t61-xu-yHL"/>
                                 <exclude reference="uVB-9V-z2A"/>
+                                <include reference="K8L-rj-c76"/>
+                                <include reference="LUo-6Z-bw9"/>
+                                <include reference="rIU-v8-mgi"/>
+                                <include reference="tBn-Sn-RXt"/>
+                                <include reference="Ng6-pG-VbE"/>
+                                <include reference="tvQ-Yl-935"/>
+                                <exclude reference="Kjh-Cu-o2f"/>
+                                <include reference="Lub-JE-czC"/>
                             </mask>
                         </variation>
                     </view>
@@ -137,6 +147,7 @@
                     <connections>
                         <outlet property="addressTextField" destination="UZj-an-HHX" id="lsU-5l-ABO"/>
                         <outlet property="mapView" destination="7Pt-HW-faH" id="ijo-h9-sqx"/>
+                        <outlet property="searchBarView" destination="hfs-Jq-ICy" id="vSY-26-EQa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -451,6 +462,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fju-V9-Ouc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-126" y="-390"/>
+        </scene>
+        <!--Auto Complete Controller-->
+        <scene sceneID="h4W-kG-xMq">
+            <objects>
+                <tableViewController id="mdJ-MD-pN5" customClass="AutoCompleteController" customModule="Map_Tagger" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wtD-0W-qJ1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="qtR-oV-15h">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qtR-oV-15h" id="Jca-5b-gdR">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mdJ-MD-pN5" id="crB-ex-ThV"/>
+                            <outlet property="delegate" destination="mdJ-MD-pN5" id="KeF-g8-hJs"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UNg-vo-XC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-121" y="291"/>
         </scene>
     </scenes>
 </document>

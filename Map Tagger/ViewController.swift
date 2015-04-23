@@ -8,37 +8,17 @@
 
 import UIKit
 import CoreData
-class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate{
+var searcher : UISearchController!
+class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate , UISearchBarDelegate{
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
     var markerInfo:MarkerModel!
+    let googlePlaceAPI = GooglePlaceAPI()
+    let src = AutoCompleteController()
     let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        println("sselectedDate1=\(selectedDate)")
-        let fetchRequest = NSFetchRequest(entityName: "Marker")
-        var error:NSError?
-        
-        if selectedDate == nil {
-          var dateFormatter = NSDateFormatter()
-          dateFormatter.dateFormat = "yyyy-MM-dd"
-          selectedDate = dateFormatter.stringFromDate(NSDate())
-          
-        }
-        let pred = NSPredicate(format: "(date = %@)", "\(selectedDate)")
-        fetchRequest.predicate = pred
-        
-        markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as![Marker]
-        
-        if error != nil {
-            println("Failed ti retrieve record: \(error!.localizedDescription)")
-        }
-        //markersData[0].setValue("firstt", forKey: "name")
-        //managedObjectContext?.save(&error)
-        println("sselectedDate2=\(selectedDate)")
-        println("viewWillAppear")
-        
-    }
+    
+    @IBOutlet weak var searchBarView: UIView!
+    
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
         let placeMarker = marker 
@@ -84,7 +64,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //CoreData
         var marker : Marker
         marker = NSEntityDescription.insertNewObjectForEntityForName("Marker", inManagedObjectContext: managedObjectContext!) as!Marker
-        marker.name = "New Place"
+        marker.name = markerInfo.name
         marker.address = markerInfo.address
         marker.longtitude = markerInfo.coordinate.longitude
         marker.latitude = markerInfo.coordinate.latitude
@@ -103,6 +83,30 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
 
        // }
 
+    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+        println("searchBarSearchButtonClicked")
+        println("typed:\(searcher.searchBar.text)")
+        searcher.active = false
+        
+    }
+    func searchBarTextDidEndEditing(searchBar: UISearchBar){ // wiser:connected the action didSelectRowAtIndexPath in AutoCompleteController , set searcher.active=false as well
+        println("searchBarTextDidEndEditing")
+        if src.selected! {
+            println("autocomplete:\(src.originalData[src.selectedIndex.row]) , \(src.place_ids[src.selectedIndex.row])")
+            //descriptionLabel.text="description:"+src.originalData[src.selectedIndex.row]
+            //placeidLabel.text="place id:"+src.place_ids[src.selectedIndex.row]
+            let name = src.originalData[src.selectedIndex.row]
+            googlePlaceAPI.fetchPlacesDetail(src.place_ids[src.selectedIndex.row]){ place in
+                //self.coordinateLabel.text="coordinate: \(place!.coordinate.longitude), \(place!.coordinate.latitude)"
+                //self.addressLabel.text="address:\(place!.address)"
+                self.markerInfo = MarkerModel(name: name, coordinate: place!.coordinate, address: place!.address)
+                self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+                self.mapView.clear()
+                var marker = GMSMarker(position: self.markerInfo.coordinate)
+                marker.map=self.mapView
+            }
+        }
     }
 
     @IBAction func searchAddressTapped(sender: AnyObject) {
@@ -182,11 +186,47 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         }
     }
 
-   
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        println("sselectedDate1=\(selectedDate)")
+        let fetchRequest = NSFetchRequest(entityName: "Marker")
+        var error:NSError?
+        
+        if selectedDate == nil {
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            selectedDate = dateFormatter.stringFromDate(NSDate())
+            
+        }
+        let pred = NSPredicate(format: "(date = %@)", "\(selectedDate)")
+        fetchRequest.predicate = pred
+        
+        markersData = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error) as![Marker]
+        
+        if error != nil {
+            println("Failed ti retrieve record: \(error!.localizedDescription)")
+        }
+        //markersData[0].setValue("firstt", forKey: "name")
+        //managedObjectContext?.save(&error)
+        println("sselectedDate2=\(selectedDate)")
+        println("viewWillAppear")
+        
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        // instantiate a search controller and keep it alive
+        searcher = UISearchController(searchResultsController: src)
+        //self.searcher = searcher
+        // specify who the search controller should notify when the search bar changes
+        searcher.searchResultsUpdater = src
+        searcher.searchBar.autocapitalizationType = .None
+        searchBarView.addSubview(searcher.searchBar)
+        searcher.searchBar.sizeToFit() // crucial, trust me on this one
+        searcher.searchBar.delegate = self
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         mapView.delegate=self

@@ -119,9 +119,8 @@ class DataManager {
         println("jsafkhdsfglfa")
         var marker : MarkerModel!
         println("asdffdgdsg")
-        marker = MarkerModel(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
+        marker = MarkerModel(name: "New Place" ,coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
         println("qwefasf")
-        marker.name = "New Places"
         marker.note = ""
       //  marker.latitude = latitude
       //  marker.longtitude = longtitude
