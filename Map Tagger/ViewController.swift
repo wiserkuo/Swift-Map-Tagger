@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 var searcher : UISearchController!
+
+
 class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate , UISearchBarDelegate{
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
@@ -17,8 +19,8 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     let src = AutoCompleteController()
     let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
     
-    @IBOutlet weak var searchBarView: UIView!
     
+    @IBOutlet weak var searchBarView: UIView!
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
         let placeMarker = marker 
@@ -183,6 +185,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             
             // 7
             locationManager.stopUpdatingLocation()
+
         }
     }
 
@@ -209,28 +212,45 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //markersData[0].setValue("firstt", forKey: "name")
         //managedObjectContext?.save(&error)
         println("sselectedDate2=\(selectedDate)")
-        println("viewWillAppear")
         
-    }
+        
+        
 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //self.view.insertSubview(searcher.searchBar, atIndex: 1)
+        //searcher.searchBar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        /*searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Top , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Top, multiplier: 1.0, constant: 0.0))
+        searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Leading , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Leading, multiplier: 1.0, constant: 0.0))
+        searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Trailing , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
+        searcher.searchBar.sizeToFit()
+*/
         // instantiate a search controller and keep it alive
         searcher = UISearchController(searchResultsController: src)
-        //self.searcher = searcher
         // specify who the search controller should notify when the search bar changes
         searcher.searchResultsUpdater = src
         searcher.searchBar.autocapitalizationType = .None
-        searchBarView.addSubview(searcher.searchBar)
-        searcher.searchBar.sizeToFit() // crucial, trust me on this one
+
         searcher.searchBar.delegate = self
+
+        println("viewWillAppear")
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        searchBarView.addSubview(searcher.searchBar)
+        searcher.searchBar.sizeToFit()
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view, typically from a nib.
+  
+        
+
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         mapView.delegate=self
-
+        println("viewDidLoad")
     }
 
     override func didReceiveMemoryWarning() {
