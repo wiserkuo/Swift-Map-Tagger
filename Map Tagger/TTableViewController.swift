@@ -1,28 +1,23 @@
 //
-//  AutoCompleteController.swift
-//  SearchController
+//  TTableViewController.swift
+//  Map Tagger
 //
-//  Created by wiserkuo on 2015/4/22.
-//  Copyright (c) 2015年 wiserkuo. All rights reserved.
+//  Created by wiserkuo on 2015/5/5.
+//  Copyright (c) 2015年 sw5. All rights reserved.
 //
 
 import UIKit
 
-class AutoCompleteController: UITableViewController {
-    var originalData : [String] = []
-    var place_ids : [String] = []
-    var filteredData : [String] = []
-    var googlePlaceAPI = GooglePlaceAPI()
-    var selectedIndex = NSIndexPath()
-    var selected : Bool!
+class TTableViewController: UITableViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,31 +30,24 @@ class AutoCompleteController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return self.filteredData.count
+        return 0
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-        cell.textLabel!.text = self.filteredData[indexPath.row]
-        println("indexPath=\(indexPath.row)")
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
 
         return cell
     }
-    override func tableView(tableView: UITableView,didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndex=indexPath
-        selected = true
-        searcher.active=false
-        
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -101,47 +89,9 @@ class AutoCompleteController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("prepareForSegue")
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
     */
 
-}
-/*
-This is the only other interesting part!
-We are the searchResultsUpdater, which simply means that our
-updateSearchResultsForSearchController is called every time something happens
-in the search bar. So, every time it is called,
-filter the original data in accordance with what's in the search bar,
-and reload the table.
-*/
-
-extension AutoCompleteController : UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        println("updateSearchResultsForSearchController")
-        selected = false
-        self.originalData.removeAll()
-        self.place_ids.removeAll()
-        self.filteredData.removeAll()
-        googlePlaceAPI.fetchPlacesAutoComplete(searchController.searchBar.text){ predictions in
-            for prediction: Prediction in predictions {
-                //println("\(prediction.description)")
-                //      self.sectionData.append(prediction.description)
-                self.originalData.append(prediction.description)
-                self.place_ids.append(prediction.place_id)
-            }
-            //src.reloadOriginalData(self.sectionData)
-            //src.tableView.reloadData()
-            self.filteredData = self.originalData
-            /*self.filteredData = self.originalData.filter {
-            s in
-            let options = NSStringCompareOptions.CaseInsensitiveSearch
-            let found = s.rangeOfString(searchController.searchBar.text, options: options)
-            return (found != nil)
-            }*/
-            println("reloadData")
-            self.tableView.reloadData()
-        }
-    }
 }

@@ -20,7 +20,7 @@ class GooglePlaceAPI {
     var predictions = [Prediction]()
     //var detail : Detail!
 //https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyA0LhU68y48rb04f4kfvMH8xOsyCr7xz24&input=new%20york
-    func fetchPlacesAutoComplete(input:String, completion: (([Prediction]) -> Void)) -> ()
+    func fetchPlacesAutoComplete(input:String, completion: (([Prediction]) -> Void)) -> ( [Prediction])
     {
     predictions.removeAll()
        //input = "new york"
@@ -43,15 +43,16 @@ class GooglePlaceAPI {
                     for rawPlace:AnyObject in results {
                         let place = Prediction(dictionary: rawPlace as! NSDictionary)
                         self.predictions.append(place)
-                        println("\(place.description) , \(place.place_id)")
+                      //  println("\(place.description) , \(place.place_id)")
                     }
                 }
             }
-            dispatch_async(dispatch_get_main_queue()) {
+            dispatch_sync(dispatch_get_main_queue()) {
                 completion(self.predictions)
             }
         }
         placesTask.resume()
+        return predictions
     }
     func fetchPlacesDetail(placeid:String, completion: ((Detail?) -> Void)) -> ()
     {

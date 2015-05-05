@@ -11,7 +11,7 @@ import CoreData
 let TopAppURL = "https://itunes.apple.com/us/rss/topgrossingipadapplications/limit=25/json"
 let GMSURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
 class DataManager {
-    
+
     class func getTopAppsDataFromFileWithSuccess(success: ((data: NSData) -> Void)) {
         //1
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -116,11 +116,9 @@ class DataManager {
         }
         println("latitude=\(latitude) , longtitude=\(longtitude)")
         println("address=\(formatted_address)")
-        println("jsafkhdsfglfa")
         var marker : MarkerModel!
         println("asdffdgdsg")
         marker = MarkerModel(name: "New Place" ,coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longtitude), address: formatted_address)
-        println("qwefasf")
         marker.note = ""
       //  marker.latitude = latitude
       //  marker.longtitude = longtitude

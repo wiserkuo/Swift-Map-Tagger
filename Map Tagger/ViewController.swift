@@ -9,18 +9,29 @@
 import UIKit
 import CoreData
 var searcher : UISearchController!
+var searcher2 : UISearchDisplayController!
 
-
-class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate , UISearchBarDelegate{
+class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDelegate , UISearchBarDelegate {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var addressTextField: UITextField!
     var markerInfo:MarkerModel!
     let googlePlaceAPI = GooglePlaceAPI()
     let src = AutoCompleteController()
+    var src2 = AutoCompleteIOS7Controller()
     let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
-    
+    var autoCompleteName :String!
+    var autoCompletePlaceID : String!
+    @IBOutlet weak var searchButton: UIBarButtonItem!
     
     @IBOutlet weak var searchBarView: UIView!
+    
+    
+    
+    @IBAction func searchTapped(sender: AnyObject) {
+        
+        
+    }
+    
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
         let placeMarker = marker 
@@ -45,6 +56,19 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         else {
             return nil
         }
+    }
+    @IBAction func autoCompleteIOS7Controller(segue:UIStoryboardSegue){
+        println("autoCompleteIOS7Controller")
+
+        let name = autoCompleteName
+        googlePlaceAPI.fetchPlacesDetail(autoCompletePlaceID){ place in
+            self.markerInfo = MarkerModel(name: name, coordinate: place!.coordinate, address: place!.address)
+            self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+            self.mapView.clear()
+            var marker = GMSMarker(position: self.markerInfo.coordinate)
+            marker.map=self.mapView
+        }
+
     }
     @IBAction func doneTableViewController(segue:UIStoryboardSegue){
 
@@ -88,9 +112,13 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar){
         println("searchBarSearchButtonClicked")
-        println("typed:\(searcher.searchBar.text)")
-        searcher.active = false
+        if let gotSearchController: AnyClass = NSClassFromString("UISearchController"){
+          println("typed:\(searcher.searchBar.text)")
+          searcher.active = false
+        }
+        else {
         
+        }
     }
     func searchBarTextDidEndEditing(searchBar: UISearchBar){ // wiser:connected the action didSelectRowAtIndexPath in AutoCompleteController , set searcher.active=false as well
         println("searchBarTextDidEndEditing")
@@ -110,7 +138,14 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             }
         }
     }
-
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar){
+        println("searchBarTextDidBeginEditing")
+        if let gotSearchController: AnyClass = NSClassFromString("UISearchController"){}
+        else {
+            println("searcher2.setActive")
+           // searcher2.setActive(true, animated: true)
+        }
+    }
     @IBAction func searchAddressTapped(sender: AnyObject) {
         println(addressTextField.text);
 
@@ -213,9 +248,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //managedObjectContext?.save(&error)
         println("sselectedDate2=\(selectedDate)")
         
-        
-        
-
         //self.view.insertSubview(searcher.searchBar, atIndex: 1)
         //searcher.searchBar.setTranslatesAutoresizingMaskIntoConstraints(false)
         /*searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Top , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Top, multiplier: 1.0, constant: 0.0))
@@ -223,32 +255,72 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Trailing , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
         searcher.searchBar.sizeToFit()
 */
-        // instantiate a search controller and keep it alive
-        searcher = UISearchController(searchResultsController: src)
-        // specify who the search controller should notify when the search bar changes
-        searcher.searchResultsUpdater = src
-        searcher.searchBar.autocapitalizationType = .None
-
-        searcher.searchBar.delegate = self
-
         println("viewWillAppear")
         
     }
     
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        searchBarView.addSubview(searcher.searchBar)
-        searcher.searchBar.sizeToFit()
+        if let gotSearchController: AnyClass = NSClassFromString("UISearchController"){
+            println("IOS8:UISearchController")
+            // instantiate a search controller and keep it alive
+            searcher = UISearchController(searchResultsController: src)
+            // specify who the search controller should notify when the search bar changes
+            searcher.searchResultsUpdater = src
+            
+            searcher.searchBar.autocapitalizationType = .None
+        
+            searcher.searchBar.delegate = self
+        
+            searchBarView.addSubview(searcher.searchBar)
+            searcher.searchBar.sizeToFit()
+        }
+       else{
+            println("IOS7:UISearchDisplayController")
+            
+            mapView.myLocationEnabled = true
+            mapView.settings.myLocationButton = true
+            //locationManager.startUpdatingLocation()
+            
+           // searchBarView.
+            /*let searchBar = UISearchBar()
+            searchBar.delegate = self
+            
+            searchBar.text = "test"
+            let searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
+            searcher2.searchResultsDataSource = src2
+            searcher2.searchResultsDelegate = src2
+            searchBarView.addSubview(searcher2.searchBar)
+            searcher2.searchBar.sizeToFit()
+            */
+            
+            //src2 = AutoCompleteIOS7Controller()
+            
+            //src2.setSearchDisplayController(self.searchDisplayController!)
+            //self.searchDisplayController?.delegate = src2
+           // self.searchDisplayController?.searchResultsDataSource = src2
+           // self.searchDisplayController?.searchResultsDelegate = src2
+           // self.searchDisplayController?.searchBar.delegate = self
+           // var searchBar = UISearchBar()
+          //  searchBarView.addSubview(searchBar)
+          //  searchBar.sizeToFit()
+           // searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
+           // searcher2.searchResultsDataSource = src2
+           // searcher2.searchResultsDelegate = src2
+            //searchBar.delegate = self
+        }
+    
     }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view, typically from a nib.
-  
-        
-
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        if locationManager.respondsToSelector("requestWhenInUseAuthorization") {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
         mapView.delegate=self
         println("viewDidLoad")
     }

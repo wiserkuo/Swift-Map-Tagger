@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D115B721AB02CB2005CCB1D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D115B711AB02CB2005CCB1D /* TableViewController.swift */; };
+		2D25A0911AF720D9007DABE3 /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0901AF720D9007DABE3 /* Candy.swift */; };
+		2D25A0931AF87295007DABE3 /* AutoCompleteIOS7Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */; };
+		2D25A0951AF8B5AB007DABE3 /* TTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0941AF8B5AB007DABE3 /* TTableViewController.swift */; };
 		2D26B6571ACD2D900075E6BF /* Map_Tagger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */; };
 		2D26B65D1ACD50750075E6BF /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26B65C1ACD50750075E6BF /* Marker.swift */; };
 		2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */; };
@@ -53,6 +56,9 @@
 
 /* Begin PBXFileReference section */
 		2D115B711AB02CB2005CCB1D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		2D25A0901AF720D9007DABE3 /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
+		2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteIOS7Controller.swift; sourceTree = "<group>"; };
+		2D25A0941AF8B5AB007DABE3 /* TTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTableViewController.swift; sourceTree = "<group>"; };
 		2D26B6561ACD2D900075E6BF /* Map_Tagger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Map_Tagger.xcdatamodel; sourceTree = "<group>"; };
 		2D26B65C1ACD50750075E6BF /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Marker.swift; path = ../Marker.swift; sourceTree = "<group>"; };
 		2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -150,6 +156,8 @@
 				2D115B711AB02CB2005CCB1D /* TableViewController.swift */,
 				2D939F6A1ABFFF6700596520 /* EditCellTableViewController.swift */,
 				2D4B5FC41AE94D6A005A07E4 /* AutoCompleteController.swift */,
+				2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */,
+				2D25A0901AF720D9007DABE3 /* Candy.swift */,
 				2D2B595E1AA59B0E0074D11F /* DataManager.swift */,
 				2D4B5FC21AE94D5C005A07E4 /* GooglePlaceAPI.swift */,
 				2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */,
@@ -160,6 +168,7 @@
 				2DB72FE91ABBDFB9006312BC /* MarkerInfoWindow.xib */,
 				2DB72FEB1ABBE87F006312BC /* UIViewExtension.swift */,
 				2D41557C1A84A571004B6A0E /* Main.storyboard */,
+				2D25A0941AF8B5AB007DABE3 /* TTableViewController.swift */,
 				2D41557F1A84A571004B6A0E /* Images.xcassets */,
 				2D4155811A84A571004B6A0E /* LaunchScreen.xib */,
 				2D4155761A84A571004B6A0E /* Supporting Files */,
@@ -318,8 +327,11 @@
 				2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */,
 				2D4B5FC51AE94D6A005A07E4 /* AutoCompleteController.swift in Sources */,
 				2D5603EB1AB6E45900744C3D /* SampleData.swift in Sources */,
+				2D25A0951AF8B5AB007DABE3 /* TTableViewController.swift in Sources */,
 				2D4B5FC11AE94D49005A07E4 /* GooglePlace.swift in Sources */,
+				2D25A0911AF720D9007DABE3 /* Candy.swift in Sources */,
 				2D4B5FC31AE94D5C005A07E4 /* GooglePlaceAPI.swift in Sources */,
+				2D25A0931AF87295007DABE3 /* AutoCompleteIOS7Controller.swift in Sources */,
 				2D26B65D1ACD50750075E6BF /* Marker.swift in Sources */,
 				2D2B595F1AA59B0E0074D11F /* DataManager.swift in Sources */,
 				2D41557B1A84A571004B6A0E /* ViewController.swift in Sources */,
@@ -460,6 +472,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Map Tagger/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Map Tagger-Bridging-Header.h";
@@ -478,6 +491,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Map Tagger/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Map Tagger-Bridging-Header.h";
