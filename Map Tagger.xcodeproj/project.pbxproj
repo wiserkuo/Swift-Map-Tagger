@@ -11,6 +11,7 @@
 		2D25A0911AF720D9007DABE3 /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0901AF720D9007DABE3 /* Candy.swift */; };
 		2D25A0931AF87295007DABE3 /* AutoCompleteIOS7Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */; };
 		2D25A0951AF8B5AB007DABE3 /* TTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0941AF8B5AB007DABE3 /* TTableViewController.swift */; };
+		2D25A0971AF9CE59007DABE3 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0961AF9CE59007DABE3 /* SearchTableViewController.swift */; };
 		2D26B6571ACD2D900075E6BF /* Map_Tagger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */; };
 		2D26B65D1ACD50750075E6BF /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D26B65C1ACD50750075E6BF /* Marker.swift */; };
 		2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */; };
@@ -59,6 +60,7 @@
 		2D25A0901AF720D9007DABE3 /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
 		2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteIOS7Controller.swift; sourceTree = "<group>"; };
 		2D25A0941AF8B5AB007DABE3 /* TTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTableViewController.swift; sourceTree = "<group>"; };
+		2D25A0961AF9CE59007DABE3 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		2D26B6561ACD2D900075E6BF /* Map_Tagger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Map_Tagger.xcdatamodel; sourceTree = "<group>"; };
 		2D26B65C1ACD50750075E6BF /* Marker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Marker.swift; path = ../Marker.swift; sourceTree = "<group>"; };
 		2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				2D939F6A1ABFFF6700596520 /* EditCellTableViewController.swift */,
 				2D4B5FC41AE94D6A005A07E4 /* AutoCompleteController.swift */,
 				2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */,
+				2D25A0961AF9CE59007DABE3 /* SearchTableViewController.swift */,
 				2D25A0901AF720D9007DABE3 /* Candy.swift */,
 				2D2B595E1AA59B0E0074D11F /* DataManager.swift */,
 				2D4B5FC21AE94D5C005A07E4 /* GooglePlaceAPI.swift */,
@@ -325,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D2B595D1AA5915F0074D11F /* SwiftyJSON.swift in Sources */,
+				2D25A0971AF9CE59007DABE3 /* SearchTableViewController.swift in Sources */,
 				2D4B5FC51AE94D6A005A07E4 /* AutoCompleteController.swift in Sources */,
 				2D5603EB1AB6E45900744C3D /* SampleData.swift in Sources */,
 				2D25A0951AF8B5AB007DABE3 /* TTableViewController.swift in Sources */,

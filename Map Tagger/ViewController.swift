@@ -17,7 +17,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     var markerInfo:MarkerModel!
     let googlePlaceAPI = GooglePlaceAPI()
     let src = AutoCompleteController()
-    var src2 = AutoCompleteIOS7Controller()
+    var src2 = SearchTableViewController()
     let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
     var autoCompleteName :String!
     var autoCompletePlaceID : String!
@@ -281,34 +281,17 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             
             mapView.myLocationEnabled = true
             mapView.settings.myLocationButton = true
-            //locationManager.startUpdatingLocation()
+
             
-           // searchBarView.
-            /*let searchBar = UISearchBar()
-            searchBar.delegate = self
-            
-            searchBar.text = "test"
-            let searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
+            let searchBar = UISearchBar()
+            searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
+            self.view.addSubview(searcher2.searchBar)
+            searcher2.searchBar.sizeToFit()
             searcher2.searchResultsDataSource = src2
             searcher2.searchResultsDelegate = src2
-            searchBarView.addSubview(searcher2.searchBar)
-            searcher2.searchBar.sizeToFit()
-            */
+            searcher2.delegate = src2
+            searcher2.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
             
-            //src2 = AutoCompleteIOS7Controller()
-            
-            //src2.setSearchDisplayController(self.searchDisplayController!)
-            //self.searchDisplayController?.delegate = src2
-           // self.searchDisplayController?.searchResultsDataSource = src2
-           // self.searchDisplayController?.searchResultsDelegate = src2
-           // self.searchDisplayController?.searchBar.delegate = self
-           // var searchBar = UISearchBar()
-          //  searchBarView.addSubview(searchBar)
-          //  searchBar.sizeToFit()
-           // searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
-           // searcher2.searchResultsDataSource = src2
-           // searcher2.searchResultsDelegate = src2
-            //searchBar.delegate = self
         }
     
     }
