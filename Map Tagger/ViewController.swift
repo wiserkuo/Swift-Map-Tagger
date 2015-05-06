@@ -285,7 +285,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             
             let searchBar = UISearchBar()
             searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
-            self.view.addSubview(searcher2.searchBar)
+            searchBarView.addSubview(searcher2.searchBar)
             searcher2.searchBar.sizeToFit()
             searcher2.searchResultsDataSource = src2
             searcher2.searchResultsDelegate = src2
