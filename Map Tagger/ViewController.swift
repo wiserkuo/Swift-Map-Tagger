@@ -17,7 +17,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     var markerInfo:MarkerModel!
     let googlePlaceAPI = GooglePlaceAPI()
     let src = AutoCompleteController()
-    var src2 = SearchTableViewController()
+    var src2 = AutoCompleteIOS7Controller()
     let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext
     var autoCompleteName :String!
     var autoCompletePlaceID : String!
@@ -122,29 +122,46 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     }
     func searchBarTextDidEndEditing(searchBar: UISearchBar){ // wiser:connected the action didSelectRowAtIndexPath in AutoCompleteController , set searcher.active=false as well
         println("searchBarTextDidEndEditing")
-        if src.selected! {
-            println("autocomplete:\(src.originalData[src.selectedIndex.row]) , \(src.place_ids[src.selectedIndex.row])")
-            //descriptionLabel.text="description:"+src.originalData[src.selectedIndex.row]
-            //placeidLabel.text="place id:"+src.place_ids[src.selectedIndex.row]
-            let name = src.originalData[src.selectedIndex.row]
-            googlePlaceAPI.fetchPlacesDetail(src.place_ids[src.selectedIndex.row]){ place in
-                //self.coordinateLabel.text="coordinate: \(place!.coordinate.longitude), \(place!.coordinate.latitude)"
-                //self.addressLabel.text="address:\(place!.address)"
-                self.markerInfo = MarkerModel(name: name, coordinate: place!.coordinate, address: place!.address)
-                self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
-                self.mapView.clear()
-                var marker = GMSMarker(position: self.markerInfo.coordinate)
-                marker.map=self.mapView
+        if let gotSearchController: AnyClass = NSClassFromString("UISearchController"){
+            self.navigationController?.navigationBarHidden = false
+            println("toplayoutguide=\(self.topLayoutGuide.length)")
+            if src.selected! {
+                println("autocomplete:\(src.filteredData[src.selectedIndex.row]) , \(src.place_ids[src.selectedIndex.row])")
+                let name = src.filteredData[src.selectedIndex.row]
+                googlePlaceAPI.fetchPlacesDetail(src.place_ids[src.selectedIndex.row]){ place in
+                    self.markerInfo = MarkerModel(name: name, coordinate: place!.coordinate, address: place!.address)
+                    self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+                    self.mapView.clear()
+                    var marker = GMSMarker(position: self.markerInfo.coordinate)
+                    marker.map=self.mapView
+                }
             }
+        }
+        else{
+            self.navigationController?.navigationBarHidden = false
+            println("toplayoutguide=\(self.topLayoutGuide.length)")
+            if src2.selected! {
+                println("autocomplete:\(src2.filteredData[src2.selectedIndex.row]) , \(src2.place_ids[src.selectedIndex.row])")
+                let name = src2.filteredData[src2.selectedIndex.row]
+                googlePlaceAPI.fetchPlacesDetail(src2.place_ids[src2.selectedIndex.row]){ place in
+                    self.markerInfo = MarkerModel(name: name, coordinate: place!.coordinate, address: place!.address)
+                    self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: 14, bearing: 0, viewingAngle: 0)
+                    self.mapView.clear()
+                    var marker = GMSMarker(position: self.markerInfo.coordinate)
+                    marker.map=self.mapView
+                }
+            }
+        
         }
     }
     func searchBarTextDidBeginEditing(searchBar: UISearchBar){
         println("searchBarTextDidBeginEditing")
-        if let gotSearchController: AnyClass = NSClassFromString("UISearchController"){}
-        else {
-            println("searcher2.setActive")
-           // searcher2.setActive(true, animated: true)
-        }
+        self.navigationController?.navigationBarHidden = true
+        println("toplayoutguide=\(self.topLayoutGuide.length)")
+
+
+        
+        //searcher.searchBar.frame.origin.y += self.topLayoutGuide.length
     }
     @IBAction func searchAddressTapped(sender: AnyObject) {
         println(addressTextField.text);
@@ -273,25 +290,42 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         
             searcher.searchBar.delegate = self
         
-            searchBarView.addSubview(searcher.searchBar)
+            //searchBarView.addSubview(searcher.searchBar)
+           // searcher.searchBar.sizeToFit()
+            self.view.addSubview(searcher.searchBar)
             searcher.searchBar.sizeToFit()
+            self.navigationController?.navigationBar.translucent = false
         }
        else{
             println("IOS7:UISearchDisplayController")
             
             mapView.myLocationEnabled = true
             mapView.settings.myLocationButton = true
-
-            
+            self.navigationController?.navigationBar.translucent = false
             let searchBar = UISearchBar()
             searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
-            searchBarView.addSubview(searcher2.searchBar)
             searcher2.searchBar.sizeToFit()
+            self.view.addSubview(searcher2.searchBar)
             searcher2.searchResultsDataSource = src2
             searcher2.searchResultsDelegate = src2
             searcher2.delegate = src2
-            searcher2.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-            
+            searcher2.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+            /*
+            self.navigationController?.navigationBar.translucent = false
+            stc = SearchTableViewController()
+            searchBar = UISearchBar()
+            sbdc = UISearchDisplayController(searchBar: searchBar, contentsController: self)
+            sbdc!.searchBar.sizeToFit()
+            //sbdc!.searchBar.frame.origin.y = self.topLayoutGuide.length
+            self.view.addSubview(sbdc!.searchBar)
+            //sbdc!.searchBar.frame = CGRectMake(0, 0, 200, 20)
+            //var searchBarItem = UIBarButtonItem(customView: sbdc!.searchBar)
+            //self.navigationItem.leftBarButtonItem = searchBarItem
+            sbdc?.delegate = stc
+            sbdc?.searchResultsDataSource = stc
+            sbdc?.searchResultsDelegate = stc
+            sbdc?.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+            */
         }
     
     }

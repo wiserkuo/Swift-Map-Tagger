@@ -20,22 +20,25 @@ class GooglePlaceAPI {
     var predictions = [Prediction]()
     //var detail : Detail!
 //https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyA0LhU68y48rb04f4kfvMH8xOsyCr7xz24&input=new%20york
-    func fetchPlacesAutoComplete(input:String, completion: (([Prediction]) -> Void)) -> ( [Prediction])
+    func fetchPlacesAutoComplete(input:String, completion: (([Prediction]) -> Void)) -> Void
     {
-    predictions.removeAll()
-       //input = "new york"
-        //let a = "new york"
-       var urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=\(apiKey)&input=\(input)"
+        
+      
+       //var downloadGroup = dispatch_group_create()
+       self.predictions.removeAll()
+       var urlString = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=\(self.apiKey)&input=\(input)"
        // println("\(urlString1)")
         //let typesString = types.count > 0 ? join("|", types) : "food"
         //urlString += "&types=\(typesString)"
         urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
-        if placesTask.taskIdentifier > 0 && placesTask.state == .Running {
-            placesTask.cancel()
+        if self.placesTask.taskIdentifier > 0 && self.placesTask.state == .Running {
+            self.placesTask.cancel()
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        placesTask = session.dataTaskWithURL(NSURL(string: urlString)!) {data, response, error in
+        
+       // dispatch_group_enter(downloadGroup)
+        self.placesTask = self.session.dataTaskWithURL(NSURL(string: urlString)!) {data, response, error in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             self.predictions = [Prediction]()
             if let json = NSJSONSerialization.JSONObjectWithData(data, options:nil, error:nil) as? NSDictionary {
@@ -47,12 +50,20 @@ class GooglePlaceAPI {
                     }
                 }
             }
-            dispatch_sync(dispatch_get_main_queue()) {
+           // dispatch_group_leave(downloadGroup)
+           // dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER)
+            if let gotSearchController: AnyClass = NSClassFromString("UISearchController"){
+                dispatch_async(dispatch_get_main_queue()) {
+                    completion(self.predictions)
+                }
+            }
+            else{
                 completion(self.predictions)
             }
         }
-        placesTask.resume()
-        return predictions
+        
+        self.placesTask.resume()
+
     }
     func fetchPlacesDetail(placeid:String, completion: ((Detail?) -> Void)) -> ()
     {

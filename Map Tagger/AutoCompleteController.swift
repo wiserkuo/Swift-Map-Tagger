@@ -17,6 +17,7 @@ class AutoCompleteController: UITableViewController {
     var selected : Bool!
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -24,7 +25,9 @@ class AutoCompleteController: UITableViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
     }
-
+    override func viewDidAppear(animated: Bool) {
+    
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -128,18 +131,10 @@ extension AutoCompleteController : UISearchResultsUpdating {
             for prediction: Prediction in predictions {
                 //println("\(prediction.description)")
                 //      self.sectionData.append(prediction.description)
-                self.originalData.append(prediction.description)
+                self.filteredData.append(prediction.description)
                 self.place_ids.append(prediction.place_id)
             }
-            //src.reloadOriginalData(self.sectionData)
-            //src.tableView.reloadData()
-            self.filteredData = self.originalData
-            /*self.filteredData = self.originalData.filter {
-            s in
-            let options = NSStringCompareOptions.CaseInsensitiveSearch
-            let found = s.rangeOfString(searchController.searchBar.text, options: options)
-            return (found != nil)
-            }*/
+            println("\(self.filteredData.last)")
             println("reloadData")
             self.tableView.reloadData()
         }

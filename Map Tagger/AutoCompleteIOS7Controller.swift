@@ -72,38 +72,41 @@ class AutoCompleteIOS7Controller: UITableViewController , UISearchBarDelegate, U
     }
     override func tableView(tableView: UITableView,didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("select")
-        self.selectedIndex = indexPath
-        self.performSegueWithIdentifier("autoCompleted", sender: self)
+        selectedIndex=indexPath
+        selected = true
+        searcher.active=false
     }
-    func updateSearchResultsForSearchController(searchString :String!) {
-        println("updateSearchResultsForSearchController")
-        selected = false
 
-        
-        let predictions = googlePlaceAPI.fetchPlacesAutoComplete(searchString){ predictions in
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+
+        selected = false
+        var downloadGroup = dispatch_group_create()
+        dispatch_group_enter(downloadGroup)
+        self.googlePlaceAPI.fetchPlacesAutoComplete(searchString){ predictions in
+
             self.place_ids.removeAll()
             self.filteredData.removeAll()
             for prediction: Prediction in predictions {
                 //println("\(prediction.description)")
                 //      self.sectionData.append(prediction.description)
                 self.filteredData.append(prediction.description)
-                println("prediction:\(prediction.description)")
+                //println("prediction:\(prediction.description)")
                 self.place_ids.append(prediction.place_id)
             }
-            if self.filteredData.count == 0 {
-                println("filteredData.count=0")
-            }
+            println("filteredData.last=\(self.filteredData.last)")
+            dispatch_group_leave(downloadGroup)
         }
-
-
-    }
-
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        updateSearchResultsForSearchController(searchString)
-        //sleep(1)
+        /*
+        var downloadGroup = dispatch_group_create()
+        dispatch_group_enter(downloadGroup)
+        dispatch_group_leave(downloadGroup)
+        dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER)
+        */
+       
+        dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER)
+        println("end")
         return true
     }
-    
     /*func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchScope searchOption: Int) -> Bool {
         let scope = self.searchDisplayController!.searchBar.scopeButtonTitles as! [String]
         self.filterContentForSearchText(self.searchDisplayController!.searchBar.text, scope: scope[searchOption])
