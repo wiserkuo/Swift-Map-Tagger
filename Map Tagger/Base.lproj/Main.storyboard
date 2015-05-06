@@ -437,14 +437,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for Candy" id="Sxf-em-u6G">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="u9F-Uj-zXc" id="vn8-qb-pCY"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Kml-1c-gZV">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -469,7 +461,6 @@
                 <searchDisplayController id="5Eo-BZ-Bd5">
                     <connections>
                         <outlet property="delegate" destination="u9F-Uj-zXc" id="MwJ-h0-Yki"/>
-                        <outlet property="searchBar" destination="Sxf-em-u6G" id="Pqk-OG-XAf"/>
                         <outlet property="searchContentsController" destination="u9F-Uj-zXc" id="9ST-zq-25L"/>
                         <outlet property="searchResultsDataSource" destination="u9F-Uj-zXc" id="5XE-5C-YrM"/>
                         <outlet property="searchResultsDelegate" destination="u9F-Uj-zXc" id="avn-0C-Yrp"/>
