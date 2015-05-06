@@ -25,13 +25,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     
     @IBOutlet weak var searchBarView: UIView!
     
-    
-    
-    @IBAction func searchTapped(sender: AnyObject) {
-        
-        
-    }
-    
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
         let placeMarker = marker 
@@ -141,7 +134,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             self.navigationController?.navigationBarHidden = false
             println("toplayoutguide=\(self.topLayoutGuide.length)")
             if src2.selected! {
-                println("autocomplete:\(src2.filteredData[src2.selectedIndex.row]) , \(src2.place_ids[src.selectedIndex.row])")
+                println("autocomplete:\(src2.filteredData[src2.selectedIndex.row]) , \(src2.place_ids[src2.selectedIndex.row])")
                 let name = src2.filteredData[src2.selectedIndex.row]
                 googlePlaceAPI.fetchPlacesDetail(src2.place_ids[src2.selectedIndex.row]){ place in
                     self.markerInfo = MarkerModel(name: name, coordinate: place!.coordinate, address: place!.address)
@@ -303,9 +296,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             mapView.settings.myLocationButton = true
             self.navigationController?.navigationBar.translucent = false
             let searchBar = UISearchBar()
-            searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: src2)
+            searcher2 = UISearchDisplayController(searchBar: searchBar, contentsController: self)
             searcher2.searchBar.sizeToFit()
             self.view.addSubview(searcher2.searchBar)
+            searcher2.searchBar.delegate = self
             searcher2.searchResultsDataSource = src2
             searcher2.searchResultsDelegate = src2
             searcher2.delegate = src2

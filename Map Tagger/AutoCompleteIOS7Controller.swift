@@ -42,31 +42,29 @@ class AutoCompleteIOS7Controller: UITableViewController , UISearchBarDelegate, U
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        //if tableView == searcher2!.searchResultsTableView {
             return self.filteredData.count
-        }
-        return 0
+        //}
+        //return 0
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //same String "Cell" with the tableviewcell's identifier , set in storyboard->attribute inspector
         let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
-        if (self.searchDisplayController?.active == true) {
         println("indexPath=\(indexPath.row)")
         var result : String
         
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        //if tableView == searcher2!.searchResultsTableView {
             
-            result = filteredData[indexPath.row]
-        } else {
-            result = emptyData[indexPath.row]
-        }
+        result = filteredData[indexPath.row]
+        //} else {
+        //    result = emptyData[indexPath.row]
+        //}
         cell.textLabel?.text = result
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         // Configure the cell...
-        }
             
         return cell
     }
@@ -74,7 +72,7 @@ class AutoCompleteIOS7Controller: UITableViewController , UISearchBarDelegate, U
         println("select")
         selectedIndex=indexPath
         selected = true
-        searcher.active=false
+        searcher2.active=false
     }
 
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
@@ -96,12 +94,6 @@ class AutoCompleteIOS7Controller: UITableViewController , UISearchBarDelegate, U
             println("filteredData.last=\(self.filteredData.last)")
             dispatch_group_leave(downloadGroup)
         }
-        /*
-        var downloadGroup = dispatch_group_create()
-        dispatch_group_enter(downloadGroup)
-        dispatch_group_leave(downloadGroup)
-        dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER)
-        */
        
         dispatch_group_wait(downloadGroup, DISPATCH_TIME_FOREVER)
         println("end")

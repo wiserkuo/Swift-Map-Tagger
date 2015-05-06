@@ -58,12 +58,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="i64-XC-scb">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="Fpr-5J-POH">
-                            <connections>
-                                <action selector="searchTapped:" destination="vXZ-lx-hvc" id="Tfa-EO-XC8"/>
-                                <segue destination="u9F-Uj-zXc" kind="push" id="9X2-50-3Ja"/>
-                            </connections>
-                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7p3-6X-CKe">
                             <rect key="frame" x="205" y="8" width="191" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -85,7 +79,6 @@
                     <connections>
                         <outlet property="mapView" destination="7Pt-HW-faH" id="ijo-h9-sqx"/>
                         <outlet property="searchBarView" destination="LDe-5n-d8z" id="ejA-mG-rio"/>
-                        <outlet property="searchButton" destination="Fpr-5J-POH" id="Pdj-Xd-GRn"/>
                         <outlet property="searchDisplayController" destination="8Sj-vG-RtE" id="UIM-as-dan"/>
                     </connections>
                 </viewController>
@@ -453,11 +446,9 @@
                     <navigationItem key="navigationItem" id="ITP-HS-rN3"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="5Eo-BZ-Bd5" id="EJ6-FV-gjZ"/>
-                        <segue destination="sAa-Xg-da3" kind="unwind" identifier="autoCompleted" unwindAction="autoCompleteIOS7Controller:" id="zts-14-9Wh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DtB-Du-uFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="sAa-Xg-da3" userLabel="Exit" sceneMemberID="exit"/>
                 <searchDisplayController id="5Eo-BZ-Bd5">
                     <connections>
                         <outlet property="delegate" destination="u9F-Uj-zXc" id="MwJ-h0-Yki"/>
