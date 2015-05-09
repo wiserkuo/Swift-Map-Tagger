@@ -23,8 +23,29 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     var autoCompletePlaceID : String!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    @IBOutlet weak var searchBarView: UIView!
-    
+    func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
+        println("reverseGeocodeCoordinate")
+        
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(coordinate) { response , error in
+            if let address = response?.firstResult() {
+                let lines = address.lines as! [String]
+                //self.markerInfo.address = join("\n", lines)
+                println("markerInfo.address:/((self.markerInfo.address)")
+                //    self.mapView.padding = UIEdgeInsets(top: self.topLayoutGuide.length, left: 0, bottom: labelHeight, right: 0)
+                self.markerInfo = MarkerModel(name: "New Place", coordinate: coordinate, address: join("\n", lines))
+                //self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: self.mapView.camera.zoom, bearing: 0, viewingAngle: 0)
+                self.mapView.clear()
+                var marker = GMSMarker(position: self.markerInfo.coordinate)
+                marker.map=self.mapView
+            }
+        }
+    }
+    func mapView(mapView: GMSMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
+        println("didLongPressAtCoordinate")
+        reverseGeocodeCoordinate(coordinate)
+        
+    }
     func mapView(mapView: GMSMapView!, markerInfoContents marker: GMSMarker!) -> UIView! {
         // 1
         let placeMarker = marker 

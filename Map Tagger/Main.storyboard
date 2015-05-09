@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D8j-R4-JLv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D8j-R4-JLv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
@@ -37,22 +37,12 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-5n-d8z" userLabel="Search Bar View">
-                                <rect key="frame" x="10" y="64" width="580" height="30"/>
-                                <color key="backgroundColor" red="0.69586489900000004" green="0.69586489900000004" blue="0.69586489900000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PhV-ea-NuP"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LDe-5n-d8z" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="0AE-2J-XpB"/>
                             <constraint firstItem="7Pt-HW-faH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="6td-N6-cMi"/>
                             <constraint firstAttribute="trailing" secondItem="7Pt-HW-faH" secondAttribute="trailing" id="8iD-KH-MIi"/>
-                            <constraint firstAttribute="trailing" secondItem="LDe-5n-d8z" secondAttribute="trailing" constant="10" id="H90-rh-eZl"/>
                             <constraint firstItem="7Pt-HW-faH" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="MHA-Hd-fPD"/>
-                            <constraint firstItem="LDe-5n-d8z" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="tTh-hz-tGm"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="7Pt-HW-faH" secondAttribute="bottom" id="zHk-g9-pGU"/>
                         </constraints>
                     </view>
@@ -78,7 +68,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="7Pt-HW-faH" id="ijo-h9-sqx"/>
-                        <outlet property="searchBarView" destination="LDe-5n-d8z" id="ejA-mG-rio"/>
                         <outlet property="searchDisplayController" destination="8Sj-vG-RtE" id="UIM-as-dan"/>
                     </connections>
                 </viewController>
