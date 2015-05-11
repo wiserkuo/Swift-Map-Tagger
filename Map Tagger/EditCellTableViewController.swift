@@ -8,13 +8,67 @@
 
 import UIKit
 
-class EditCellTableViewController: UITableViewController {
+class EditCellTableViewController: UITableViewController ,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var selectedMarker : Marker!
  
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var notesTextField: UITextField!
+    
+
+    @IBOutlet weak var photoView: UIView!
+    var imageView : UIImageView!
+    var image :UIImage!
+    
+    @IBAction func carmeraTapped(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            var imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+            imagePicker.allowsEditing = false
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    
+    @IBAction func galleryTapped(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            var imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            imagePicker.allowsEditing = true
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        self.image = image
+        println("didFinishPickingImage")
+    
+        imageView = UIImageView(frame: CGRectMake(0, 0, photoView.frame.size.width, photoView.frame.size.height))
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        
+       
+         photoView.addSubview(imageView)
+         //photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: photoView, attribute: .Top, multiplier: 1.0, constant: 0.0))
+         //photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: photoView, attribute: .Bottom, multiplier: 1.0, constant: 0.0))
+         //photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Leading, relatedBy: .Equal, toItem: photoView, attribute: .Leading, multiplier: 1.0, constant: 0.0))
+         //photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Trailing, relatedBy: .Equal, toItem: photoView, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
+         imageView.image = image
+        self.image = image
+        self.dismissViewControllerAnimated(true, completion: nil);
+        if(picker.sourceType == UIImagePickerControllerSourceType.Camera ) {
+            UIImageWriteToSavedPhotosAlbum( UIImage(data: UIImageJPEGRepresentation(image, 0.6)), nil, nil, nil)
+            var alert = UIAlertView(title: "Wow",
+                message: "Your image has been saved to Photo Library!",
+                delegate: nil,
+                cancelButtonTitle: "Ok")
+            alert.show()
+        }
+        selectedMarker.hasPhoto = 1
+        selectedMarker.photo = UIImagePNGRepresentation(image)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         println("selectedMarker=\(selectedMarker.address)")
@@ -22,14 +76,39 @@ class EditCellTableViewController: UITableViewController {
         addressLabel.text=selectedMarker.address
         nameTextField.text=selectedMarker.name
         notesTextField.text=selectedMarker.note
-        
+         //image = UIImage(named: "default")
+        //var imageView = UIImageView(image: image)
+
+        //imageView.contentMode = UIViewContentMode.Right
+        //photoView.addSubview(imageView)
+       // photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: imageView.superview, attribute: .Top, multiplier: 1.0, constant: 0.0))
+       // photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: imageView.superview, attribute: .Bottom, multiplier: 1.0, constant: 0.0))
+       // photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Leading, relatedBy: .Equal, toItem: imageView.superview, attribute: .Leading, multiplier: 1.0, constant: 0.0))
+       // photoView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Trailing, relatedBy: .Equal, toItem: imageView.superview, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
+        /*searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Top , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Top, multiplier: 1.0, constant: 0.0))
+        searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Leading , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Leading, multiplier: 1.0, constant: 0.0))
+        searchBarView.addConstraint(NSLayoutConstraint(item:  searcher.searchBar , attribute: .Trailing , relatedBy: .Equal , toItem: searcher.searchBar.superview, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
+        searcher.searchBar.sizeToFit()
+        */
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    override func viewDidAppear(animated: Bool) {
+        println("viewDidAppear hasPhoto=\(selectedMarker.hasPhoto)")
+        if selectedMarker.hasPhoto == 1 {
+            println("image")
+            imageView = UIImageView(frame: CGRectMake(0, 0, photoView.frame.size.width, photoView.frame.size.height))
+            imageView.contentMode = UIViewContentMode.ScaleAspectFit
+            photoView.addSubview(imageView)
+            imageView.image = UIImage(data: selectedMarker.photo)
+            self.image = UIImage(data: selectedMarker.photo)
+        }
 
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

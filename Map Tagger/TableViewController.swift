@@ -150,10 +150,14 @@ class TableViewController: UITableViewController ,UIActionSheetDelegate{
     }
     
     @IBAction func saveFromEdit(segue:UIStoryboardSegue) {
+        println("saveFromEdit")
         let editVC = segue.sourceViewController as! EditCellTableViewController
         self.selectIndex = self.tableView.indexPathForSelectedRow()
         markersData[self.selectIndex.row].name=editVC.selectedMarker.name
         markersData[self.selectIndex.row].note=editVC.selectedMarker.note
+        markersData[self.selectIndex.row].photo=editVC.selectedMarker.photo
+        markersData[self.selectIndex.row].hasPhoto = editVC.selectedMarker.hasPhoto
+        println("hasPhoto=\( markersData[self.selectIndex.row].hasPhoto)")
         var e: NSError?
         if !managedObjectContext.save(&e){
             println("inser error: \(e!.localizedDescription)")
@@ -243,8 +247,9 @@ println("selectedDate1=\(selectedDate)")
 
         // Configure the cell...
         let marker = markersData[indexPath.row] 
-        cell.textLabel!.text = marker.valueForKey("name") as! String?
-        cell.detailTextLabel!.text=marker.valueForKey("address") as! String?
+        cell.textLabel!.text = marker.valueForKey("name") as! String!
+        cell.detailTextLabel!.text=marker.valueForKey("address") as! String!
+        cell.imageView!.image = UIImage(data: marker.valueForKey("photo") as! NSData )
        // cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
         return cell
     }
@@ -333,11 +338,11 @@ println("selectedDate1=\(selectedDate)")
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         //super.prepareForSegue(segue, sender: sender)
-        println("segue=\(segue.identifier)")
+        println("seguee=\(segue.identifier)")
         if segue.identifier == "locateSegue" {
           //  println("row\(self.tableView.indexPathForSelectedRow()?.row)")
            selectMarker = markersData[self.selectIndex.row]
-           
+           println("hasPhoto=\(selectMarker.hasPhoto)")
         }
         if segue.identifier == "editMarkerSegue" {
             
@@ -345,7 +350,7 @@ println("selectedDate1=\(selectedDate)")
             println("index=\(self.tableView.indexPathForSelectedRow()?.row)")
            
             editCellTableViewController.selectedMarker = markersData[self.tableView.indexPathForSelectedRow()!.row]
-            
+        
         }
     }
     

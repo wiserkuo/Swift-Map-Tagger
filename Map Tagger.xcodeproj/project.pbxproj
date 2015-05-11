@@ -152,6 +152,7 @@
 			children = (
 				2D4155781A84A571004B6A0E /* AppDelegate.swift */,
 				2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */,
+				2D26B65C1ACD50750075E6BF /* Marker.swift */,
 				2D41557A1A84A571004B6A0E /* ViewController.swift */,
 				2D115B711AB02CB2005CCB1D /* TableViewController.swift */,
 				2D939F6A1ABFFF6700596520 /* EditCellTableViewController.swift */,
@@ -162,12 +163,11 @@
 				2D2B595E1AA59B0E0074D11F /* DataManager.swift */,
 				2D4B5FC21AE94D5C005A07E4 /* GooglePlaceAPI.swift */,
 				2D2B595C1AA5915F0074D11F /* SwiftyJSON.swift */,
-				2D26B65C1ACD50750075E6BF /* Marker.swift */,
 				2D4B5FC01AE94D49005A07E4 /* GooglePlace.swift */,
 				2D5603EA1AB6E45900744C3D /* SampleData.swift */,
 				2DB72FE71ABBDF2D006312BC /* MarkerInfoWindow.swift */,
-				2D182DA21AFA8E4F002AB162 /* Main.storyboard */,
 				2DB72FE91ABBDFB9006312BC /* MarkerInfoWindow.xib */,
+				2D182DA21AFA8E4F002AB162 /* Main.storyboard */,
 				2DB72FEB1ABBE87F006312BC /* UIViewExtension.swift */,
 				2D41557F1A84A571004B6A0E /* Images.xcassets */,
 				2D4155811A84A571004B6A0E /* LaunchScreen.xib */,
@@ -274,6 +274,7 @@
 					};
 					2D4155871A84A571004B6A0E = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = MUV324B3AU;
 						TestTargetID = 2D4155721A84A571004B6A0E;
 					};
 				};
@@ -504,6 +505,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -515,6 +518,7 @@
 				INFOPLIST_FILE = "Map TaggerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Map Tagger.app/Map Tagger";
 			};
 			name = Debug;
@@ -523,6 +527,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -530,6 +536,7 @@
 				INFOPLIST_FILE = "Map TaggerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Map Tagger.app/Map Tagger";
 			};
 			name = Release;
@@ -597,6 +604,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -604,6 +613,7 @@
 				INFOPLIST_FILE = "Map TaggerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Map Tagger.app/Map Tagger";
 			};
 			name = Distribute;

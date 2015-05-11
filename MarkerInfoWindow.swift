@@ -9,7 +9,12 @@
 import UIKit
 class MarkerInfoWindow: UIView {
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var coordinateLabel: UILabel!
     
+    @IBOutlet weak var image: UIImageView!
+    
+    
+    @IBAction func addMarker(sender: AnyObject) {
+        println("add marker")
+    }
     
 }

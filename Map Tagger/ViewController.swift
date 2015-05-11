@@ -53,7 +53,8 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         // 2
         if let infoView = UIView.viewFromNibName("MarkerInfoWindow") as? MarkerInfoWindow {
             infoView.addressLabel.text = markerInfo.address
-            infoView.coordinateLabel.text = "\(markerInfo.coordinate.latitude ),\n\(markerInfo.coordinate.longitude)"
+           // infoView.coordinateLabel.text = "\(markerInfo.coordinate.latitude ),\n\(markerInfo.coordinate.longitude)"
+            infoView.image.image = markerInfo.photo
             //infoView.marker=markerInfo
             // 3
             //infoView.nameLabel.text = placeMarker.place.name
@@ -88,15 +89,24 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
 
     }
     @IBAction func locateTableViewController(segue:UIStoryboardSegue){
-        let tableViewController = segue.sourceViewController as!TableViewController
+        let tableViewController = segue.sourceViewController as! TableViewController
         let selectMarker = tableViewController.selectMarker
         println("locateTableViewController")
+        println("hasPhoto=\(selectMarker.hasPhoto)")
 
+        
         mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: selectMarker.latitude, longitude: selectMarker.longtitude) , zoom: 14, bearing: 0, viewingAngle: 0)
         mapView.clear()
         var marker = GMSMarker(position: CLLocationCoordinate2D(latitude: selectMarker.latitude, longitude: selectMarker.longtitude))
-     // marker.title=selectMarker.address
-     // marker.snippet="\(selectMarker.coordinate.latitude),\(selectMarker.coordinate.longitude)"
+        markerInfo = MarkerModel(name: selectMarker.name , coordinate: CLLocationCoordinate2D(latitude: selectMarker.latitude, longitude: selectMarker.longtitude) , address: selectMarker.address)
+        
+        if selectMarker.hasPhoto == 0 {
+            markerInfo.photo = UIImage(named: "default")!
+        }
+        else{
+            markerInfo.photo = UIImage(data: selectMarker.photo )!
+        }
+        
         marker.map=self.mapView
     }
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
@@ -112,6 +122,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         //var dateFormatter = NSDateFormatter()
         //dateFormatter.dateFormat = "yyyy-MM-dd"
         //var dateString = dateFormatter.stringFromDate(NSDate())
+        let photoData = UIImagePNGRepresentation(UIImage(named: "default"))
+        marker.photo = photoData
+        marker.hasPhoto = 0
         marker.date=selectedDate
         println("selectedDate=\(selectedDate)")
         var e: NSError?

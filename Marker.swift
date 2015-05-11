@@ -16,6 +16,8 @@ class Marker: NSManagedObject {
     @NSManaged var address: String
     @NSManaged var note: String
     @NSManaged var date: String
+    @NSManaged var photo: NSData
+    @NSManaged var hasPhoto: Boolean
 }
 class MarkerModel: NSObject {
     var name:String
@@ -23,6 +25,8 @@ class MarkerModel: NSObject {
     var address:String
     var note: String
     var date: String
+    var photo: UIImage
+    var hasPhoto: Bool
     init(name:String , coordinate:CLLocationCoordinate2D , address:String){
         self.name = name
         self.address = address
@@ -31,7 +35,8 @@ class MarkerModel: NSObject {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.date = dateFormatter.stringFromDate(NSDate())
-        
+        self.hasPhoto = false
+        self.photo = UIImage(named: "default")!
         super.init()
     }
 }
