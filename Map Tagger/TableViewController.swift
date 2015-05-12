@@ -250,6 +250,7 @@ println("selectedDate1=\(selectedDate)")
         cell.textLabel!.text = marker.valueForKey("name") as! String!
         cell.detailTextLabel!.text=marker.valueForKey("address") as! String!
         cell.imageView!.image = UIImage(data: marker.valueForKey("photo") as! NSData )
+       // cell.setSelected(true, animated: true)
        // cell.detailTextLabel?.text="\(marker.coordinate.latitude) , \(marker.coordinate.longitude)"
         return cell
     }

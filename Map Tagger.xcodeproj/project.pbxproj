@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D115B721AB02CB2005CCB1D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D115B711AB02CB2005CCB1D /* TableViewController.swift */; };
+		2D1739481B01E65B002B605B /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1739471B01E65B002B605B /* TagViewController.swift */; };
 		2D182DA31AFA8E4F002AB162 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D182DA21AFA8E4F002AB162 /* Main.storyboard */; };
 		2D25A0911AF720D9007DABE3 /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0901AF720D9007DABE3 /* Candy.swift */; };
 		2D25A0931AF87295007DABE3 /* AutoCompleteIOS7Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		2D115B711AB02CB2005CCB1D /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		2D1739471B01E65B002B605B /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagViewController.swift; path = ../TagViewController.swift; sourceTree = "<group>"; };
 		2D182DA21AFA8E4F002AB162 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2D25A0901AF720D9007DABE3 /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
 		2D25A0921AF87295007DABE3 /* AutoCompleteIOS7Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteIOS7Controller.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				2D4155781A84A571004B6A0E /* AppDelegate.swift */,
 				2D26B6551ACD2D900075E6BF /* Map_Tagger.xcdatamodeld */,
 				2D26B65C1ACD50750075E6BF /* Marker.swift */,
+				2D1739471B01E65B002B605B /* TagViewController.swift */,
 				2D41557A1A84A571004B6A0E /* ViewController.swift */,
 				2D115B711AB02CB2005CCB1D /* TableViewController.swift */,
 				2D939F6A1ABFFF6700596520 /* EditCellTableViewController.swift */,
@@ -340,6 +343,7 @@
 				2D4155791A84A571004B6A0E /* AppDelegate.swift in Sources */,
 				2DB72FEC1ABBE87F006312BC /* UIViewExtension.swift in Sources */,
 				2D939F6B1ABFFF6700596520 /* EditCellTableViewController.swift in Sources */,
+				2D1739481B01E65B002B605B /* TagViewController.swift in Sources */,
 				2D26B6571ACD2D900075E6BF /* Map_Tagger.xcdatamodeld in Sources */,
 				2DB72FE81ABBDF2D006312BC /* MarkerInfoWindow.swift in Sources */,
 			);
@@ -462,8 +466,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -485,8 +489,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -584,8 +588,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

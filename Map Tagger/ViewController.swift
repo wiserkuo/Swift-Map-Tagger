@@ -22,6 +22,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
     var autoCompleteName :String!
     var autoCompletePlaceID : String!
     @IBOutlet weak var searchButton: UIBarButtonItem!
+    var isFromTageHere = false
     
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
         println("reverseGeocodeCoordinate")
@@ -38,6 +39,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
                 self.mapView.clear()
                 var marker = GMSMarker(position: self.markerInfo.coordinate)
                 marker.map=self.mapView
+                self.mapView.selectedMarker = marker
+                if self.isFromTageHere {
+                     self.mapView.camera = GMSCameraPosition(target: self.markerInfo.coordinate , zoom: self.mapView.camera.zoom, bearing: 0, viewingAngle: 0)
+                }
             }
         }
     }
@@ -82,6 +87,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             self.mapView.clear()
             var marker = GMSMarker(position: self.markerInfo.coordinate)
             marker.map=self.mapView
+            self.mapView.selectedMarker = marker
         }
 
     }
@@ -108,6 +114,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         }
         
         marker.map=self.mapView
+        self.mapView.selectedMarker = marker
     }
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         //markersData.append(Marker(coordinate: markerInfo.coordinate, address: markerInfo.address))
@@ -132,6 +139,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             println("inser error: \(e!.localizedDescription)")
             return
         }
+        self.performSegueWithIdentifier("infoWindowTapped", sender: self)
       //  if let managedObjectContext = (UIApplication.sharedApplication().delegate as!AppDelegate).managedObjectContext{
 
        // }
@@ -161,6 +169,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
                     self.mapView.clear()
                     var marker = GMSMarker(position: self.markerInfo.coordinate)
                     marker.map=self.mapView
+                    self.mapView.selectedMarker = marker
                 }
             }
         }
@@ -176,6 +185,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
                     self.mapView.clear()
                     var marker = GMSMarker(position: self.markerInfo.coordinate)
                     marker.map=self.mapView
+                    self.mapView.selectedMarker = marker
                 }
             }
         
@@ -223,6 +233,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         
        // marker.snippet="\(markerInfo.coordinate.latitude),\(markerInfo.coordinate.longitude)"
         marker.map=self.mapView
+        self.mapView.selectedMarker = marker
         //print("wiser:\(latitude)\(longtitude)")
         // mapView.camera = GMSCameraPosition(target: CLLocationCoordinate2D(latitude: latitude , longitude: longtitude ) , zoom: 15, bearing: 0, viewingAngle: 0)
         // 6 CLLocationCoordinate2D
@@ -264,7 +275,11 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             
             // 7
             locationManager.stopUpdatingLocation()
-
+            if isFromTageHere == true {
+                reverseGeocodeCoordinate(location.coordinate)
+               
+            }
+            isFromTageHere = false
         }
     }
 
@@ -355,6 +370,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
             sbdc?.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
             */
         }
+        if isFromTageHere == true {
+            locationManager.startUpdatingLocation()
+        }
     
     }
     override func viewDidLoad() {
@@ -375,7 +393,17 @@ class ViewController: UIViewController , CLLocationManagerDelegate ,GMSMapViewDe
         // Dispose of any resources that can be recreated.
         
     }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        //super.prepareForSegue(segue, sender: sender)
+        println("seguee=\(segue.identifier)")
+        if segue.identifier == "infoWindowTapped" {
+            
+        }
+
+    }
+
 
 }
 
